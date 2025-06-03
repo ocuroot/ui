@@ -1,0 +1,49 @@
+package links
+
+import "net/url"
+
+templ NewTabLink(text string, url string) {
+	<a class="underline flex mr-2" target="_blank" href={ templ.URL(url) }>
+		{ text }
+		<svg class="w-4 h-4 ml-1 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<path d="M 5 3 C 3.9069372 3 3 3.9069372 3 5 L 3 19 C 3 20.093063 3.9069372 21 5 21 L 19 21 C 20.093063 21 21 20.093063 21 19 L 21 12 L 19 12 L 19 19 L 5 19 L 5 5 L 12 5 L 12 3 L 5 3 z M 14 3 L 14 5 L 17.585938 5 L 8.2929688 14.292969 L 9.7070312 15.707031 L 19 6.4140625 L 19 10 L 21 10 L 21 3 L 14 3 z"></path>
+		</svg>
+	</a>
+}
+
+// templ NewTabLinkOrText(content store.Var) {
+// 	if content.Str != nil {
+// 		if IsURL(*content.Str) {
+// 			@NewTabLink(*content.Str, *content.Str)
+// 		} else {
+// 			{ *content.Str }
+// 		}
+// 	}
+// 	if content.Link != nil {
+// 		@NewTabLink(content.Link.Text, fmt.Sprint(content.Link.URL))
+// 	}
+// 	if content.Secret != nil {
+// 		SECRET
+// 	}
+// 	if content.Num != nil {
+// 		{ fmt.Sprint(*content.Num) }
+// 	}
+// 	if content.Flt != nil {
+// 		{ fmt.Sprint(*content.Flt) }
+// 	}
+// 	if content.Bool != nil {
+// 		{ fmt.Sprint(*content.Bool) }
+// 	}
+// }
+
+// func VarIsURL(v store.Var) bool {
+// 	if v.Str != nil {
+// 		return IsURL(*v.Str)
+// 	}
+// 	return false
+// }
+
+func IsURL(s string) bool {
+	_, err := url.ParseRequestURI(s)
+	return err == nil
+}

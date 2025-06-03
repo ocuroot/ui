@@ -1,0 +1,59 @@
+package components
+
+import (
+	"fmt"
+	"strings"
+)
+
+templ HeroGrid() {
+	<div class="grid grid-cols-3 gap-4 mb-4">
+		{ children... }
+	</div>
+}
+
+type HeroNumberProps struct {
+	Count   int
+	Title   string
+	Link    string
+	LinkURL string
+
+	HelpText string
+	HelpURL  templ.SafeURL
+}
+
+func (p HeroNumberProps) ID() string {
+	return fmt.Sprintf("hero-%v", strings.ReplaceAll(strings.ToLower(p.Title), " ", "-"))
+}
+
+templ HeroNumber(props HeroNumberProps) {
+	<div class="bg-white border border-gray-200 rounded-lg p-4 relative">
+		if props.HelpText != "" {
+			<div class="absolute top-0 right-0 m-2">
+				<div class="tooltip" data-tooltip-target={ fmt.Sprintf("tooltip-%v", props.ID()) } data-tooltip-placement="bottom">
+					if props.HelpURL != "" {
+						<a href={ props.HelpURL } target="_blank" class="text-blue-500 hover:text-blue-700">
+							<svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="10"></circle>
+								<line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.03" y2="8"></line>
+							</svg>
+						</a>
+					} else {
+						<svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"></circle>
+							<line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.03" y2="8"></line>
+						</svg>
+					}
+				</div>
+				<div id={ fmt.Sprintf("tooltip-%v", props.ID()) } role="tooltip" class="absolute w-64 z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+					{ props.HelpText }
+					<div class="tooltip-arrow" data-popper-arrow></div>
+				</div>
+			</div>
+		}
+		<h2 class="text-2xl font-bold mb-2">{ fmt.Sprint(props.Count) }</h2>
+		<p class="text-gray-600">{ props.Title }</p>
+		if props.Link != "" && props.LinkURL != "" {
+			<a href={ templ.URL(props.LinkURL) } class="text-blue-500 hover:text-blue-700">{ props.Link }</a>
+		}
+	</div>
+}

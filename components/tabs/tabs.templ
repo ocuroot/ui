@@ -1,0 +1,114 @@
+package tabs
+
+import "fmt"
+
+templ TabButtonBar() {
+	<div class="mb-4 border-b border-gray-200">
+		<ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" role="tablist">
+			{ children... }
+		</ul>
+	</div>
+}
+
+script pushModalState(id string) {
+    window.history.pushState({}, '', '?tab=' + id);
+}
+
+templ TabButton(id, label string, selected bool) {
+	<button
+		class="inline-block mr-1 p-3 bg-gray-100 border-x-1 rounded-t lg:rounded-t-lg hover:text-gray-600 hover:border-b-gray-700 hover:border-b-2"
+		id={ fmt.Sprintf("%v-tab", id) }
+		data-tabs-target={ fmt.Sprintf("#%v", id) }
+		data-tab-id={ id }
+		type="button"
+		role="tab"
+		aria-controls={ id }
+		aria-selected={ fmt.Sprint(selected) }
+		onclick={ pushModalState(id) }
+	>
+		{ label }
+	</button>
+}
+
+templ TabContents() {
+	<div id="default-tab-content">
+		{ children... }
+	</div>
+}
+
+templ TabContent(id string) {
+	<div id={ id } class="hidden p-2" role="tabpanel" aria-labelledby="{ id }-tab">
+		{ children... }
+	</div>
+}
+
+type TabProps struct {
+	Tabs []Tab
+}
+
+type Tab struct {
+	Id    string
+	Label string
+}
+
+templ Tabs(props TabProps) {
+	@TabButtonBar() {
+		for index, tab := range props.Tabs {
+			@TabButton(tab.Id, tab.Label, index == 0)
+		}
+	}
+	{ children... }
+	<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function showTab(tabId) {
+                // Hide all tab panels
+                document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+                    panel.classList.add('hidden');
+                });
+                // Show the selected tab panel
+                const panel = document.getElementById(tabId);
+                if (panel) {
+                    panel.classList.remove('hidden');
+                    // Trigger HTMX load if content hasn't been loaded yet
+                    const content = panel.querySelector('[hx-get]');
+                    if (content && !content.getAttribute('data-loaded')) {
+                        htmx.trigger(content, 'load');
+                        content.setAttribute('data-loaded', 'true');
+                    }
+                }
+                // Update button states
+                document.querySelectorAll('[role="tab"]').forEach(tab => {
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.classList.add('border-b-white');
+                    tab.classList.remove('border-black', 'text-black', 'border-b-black');
+                });
+                const button = document.getElementById(tabId + '-tab');
+                if (button) {
+                    button.setAttribute('aria-selected', 'true');
+                    button.classList.remove('border-b-white');
+                    button.classList.add('border-black', 'text-black', 'border-b-black');
+                }
+            }
+        
+            // Add click handlers to tabs
+            document.querySelectorAll('[role="tab"]').forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    const tabId = this.getAttribute('data-tabs-target').substring(1);
+                    showTab(tabId);
+                });
+
+                if (tab.getAttribute('aria-selected') == "true") {
+                    const tabId = tab.getAttribute('data-tabs-target').substring(1);
+                    showTab(tabId);
+                }
+            });
+
+            // Show initial tab
+            const urlParams = new URLSearchParams(window.location.search);
+            var defaultTab = urlParams.get('tab') || undefined;
+            if (defaultTab) {
+                showTab(defaultTab);
+            }
+        });
+    </script>
+}

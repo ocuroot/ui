@@ -1,0 +1,276 @@
+package components
+
+import (
+	"fmt"
+	"github.com/labstack/echo/v4"
+
+	"strings"
+)
+
+templ Root(c echo.Context, scripts ...templ.Component) {
+	@RootNoContainer(c, scripts...) {
+		@Container() {
+			{ children... }
+		}
+	}
+}
+
+templ RootSimple(c echo.Context, title string, scripts ...templ.Component) {
+	@Body() {
+		@Nav("max-w-screen-xl") {
+			<div class="flex items-center md:order-2">
+				<h1 class="text-xl font-semibold text-white">{ title }</h1>
+			</div>
+		}
+		@Container() {
+			{ children... }
+		}
+		@Footer("Ocuroot", "dev")
+		@Scripts(c, scripts...)
+	}
+}
+
+templ RootNoContainer(c echo.Context, scripts ...templ.Component) {
+	@Body() {
+		@Navbar(c)
+		{ children... }
+		@Footer("Ocuroot", "dev")
+		@Scripts(c, scripts...)
+	}
+}
+
+templ Container() {
+	<div class="container max-w-screen-xl mx-auto py-8 px-8">
+		{ children... }
+	</div>
+}
+
+templ Body() {
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link href="/static/output.css" rel="stylesheet"/>
+			<title>Ocuroot</title>
+			<style>
+				[role="tab"][aria-selected="true"] {
+					border-bottom-width: 2px;
+				}
+			</style>
+		</head>
+		<body hx-ext="template">
+			{ children... }
+		</body>
+	</html>
+}
+
+templ ScriptsSimple() {
+	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+	<script src="/static/js/htmx.min.js"></script>
+	<script language="javascript">
+		document.body.addEventListener('htmx:afterSwap', function(evt) {
+			initFlowbite();
+		});
+	</script>
+}
+
+templ Scripts(c echo.Context, scripts ...templ.Component) {
+	@ScriptsSimple()
+	// TODO: Restore tracking
+	// @PostHog(c)
+	for _, script := range scripts {
+		@script
+	}
+}
+
+templ Logo() {
+	<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+		<img src="/static/logo.svg" class="h-10" alt="Ocuroot Logo"/>
+		<span class="hidden sm:self-center sm:text-2xl sm:font-semibold sm:whitespace-nowrap text-white md:block">Ocuroot</span>
+	</a>
+}
+
+templ Nav(classes ...string) {
+	<nav class="bg-primarycolor w-full border-b border-gray-200">
+		<div class={ fmt.Sprintf("flex flex-wrap items-center justify-between mx-auto p-4 %s", strings.Join(classes, " ")) }>
+			@Logo()
+			<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+				{ children... }
+			</div>
+		</div>
+	</nav>
+}
+
+func hasIdentity(c echo.Context) bool {
+	// TODO: Implement this with orgs
+	return false
+}
+
+templ Navbar(c echo.Context) {
+	@Nav("max-w-screen-xl") {
+		@NavMenu("navbar-user", true) {
+			@MenuItem("Environments", "/environments", false)
+			@MenuItem("Repositories", "/repositories", false)
+			@MenuItem("Commits", "/commits", false)
+			@MenuItem("Packages", "/packages", false)
+			@DropdownMenu("releases", "Releases") {
+				@DropdownMenuItem("Releases", "/releases")
+				@DropdownMenuItem("Phases", "/phases")
+				@DropdownMenuItem("Function Chains", "/functionchains")
+				@DropdownMenuItem("Functions", "/functions")
+			}
+			@DropdownMenu("organization", "Organization") {
+				@DropdownMenuItem("Users", "/users")
+				@DropdownMenuItem("Service Accounts", "/service_accounts")
+				@DropdownMenuItem("Secrets", "/secrets")
+			}
+		}
+		@UserDropdownNone()
+		@NavMenuExpandButton("navbar-user")
+	}
+}
+
+templ NavMenu(id string, spacer bool) {
+	<div class="justify-between hidden w-full md:flex md:w-auto" id={ id }>
+		<ul class="text-white flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+			{ children... }
+			if spacer {
+				<!-- Spacer for user icon, probably a better way to do this -->
+				<div class="mx-5 hidden md:block">
+					&nbsp;
+				</div>
+			}
+		</ul>
+	</div>
+}
+
+templ NavMenuExpandButton(menuId string) {
+	<button data-collapse-toggle={ menuId } type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false">
+		<span class="sr-only">Open main menu</span>
+		<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path>
+		</svg>
+	</button>
+}
+
+templ UserDropdownNone() {
+	@UserDropdownImpl("/static/anon_user.svg") {
+		@UserDropdownSection() {
+			<span class="block text-sm text-gray-900">Not signed in</span>
+		}
+		@UserDropdownList() {
+			@UserDropdownListInfo("Organization", "TODO")
+			@UserDropdownListLink("Download CLI", "/cli")
+			@UserDropdownListLink("Log in", "/login")
+		}
+	}
+}
+
+templ UserDropdownImpl(picture string) {
+	<button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+		<span class="sr-only">Open user menu</span>
+		// no-referer is needed to avoid 403 on Google profile images:
+		// https://github.com/auth0-samples/auth0-react-samples/issues/221
+		<img class="w-8 h-8 rounded-full" src={ fmt.Sprint(templ.SafeURL(picture)) } alt="user photo" referrerpolicy="no-referrer"/>
+	</button>
+	<!-- Dropdown menu -->
+	<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
+		{ children... }
+	</div>
+}
+
+templ UserDropdownSection() {
+	<div class="px-4 py-3">
+		{ children... }
+	</div>
+}
+
+templ UserDropdownList() {
+	<ul class="py-2 text-gray-700" aria-labelledby="user-menu-button">
+		{ children... }
+	</ul>
+}
+
+templ UserDropdownListInfo(title, text string) {
+	<li>
+		<div class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+			<span class="block text-sm text-gray-900">{ title }</span>
+			<span class="block text-sm text-gray-500 truncate">{ text }</span>
+		</div>
+	</li>
+}
+
+templ UserDropdownListLink(title, url string) {
+	<li>
+		<a href={ templ.URL(url) } class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{ title }</a>
+	</li>
+}
+
+templ MenuItem(name, url string, active bool) {
+	<li>
+		if active {
+			<a href={ templ.URL(url) } class="block py-2 px-3 text-secondarycolor rounded md:bg-transparent" aria-current="page">{ name }</a>
+		} else {
+			<a href={ templ.URL(url) } class="block py-2 px-3 rounded md:bg-transparent" aria-current="page">{ name }</a>
+		}
+	</li>
+}
+
+templ DropdownMenu(id, name string) {
+	<li>
+		<button id="dropdownNavbarLink" data-dropdown-toggle={ id } class="block py-2 px-3 rounded md:bg-transparent">
+			{ name }
+			//<svg class="ml-1.5 w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"></path></svg>
+		</button>
+		<!-- Dropdown menu -->
+		<div id={ id } class="hidden z-20 w-44 text-left font-normal bg-white rounded divide-y divide-gray-100 shadow">
+			<ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+				{ children... }
+			</ul>
+		</div>
+	</li>
+}
+
+templ DropdownMenuItem(name, url string) {
+	<li>
+		<a href={ templ.URL(url) } class="block py-2 px-4 hover:bg-gray-100">{ name }</a>
+	</li>
+}
+
+templ Footer(packageName, version string) {
+	<footer class="bg-white rounded-lg m-4">
+		<div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+			<span class="text-sm text-gray-500 sm:text-center">
+				{ packageName } version { version }
+				&copy; 2025 <a href="/" class="hover:underline">Ocuroot</a>. All Rights Reserved.
+			</span>
+			<ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 sm:mt-0">
+				<li>
+					<a target="_blank" href="https://www.ocuroot.com/" class="hover:underline me-4 md:me-6">About</a>
+				</li>
+				<li>
+					<a target="_blank" href="https://www.privacypolicies.com/live/38e1a042-2c2b-42b9-a988-e8dfc8eca15f" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+				</li>
+				<li>
+					<a href="mailto:contact@ocuroot.com" class="hover:underline me-4 md:me-6">Contact</a>
+				</li>
+				<li>
+					<a target="_blank" href="https://docs.ocuroot.com" class="hover:underline">Documentation</a>
+				</li>
+			</ul>
+		</div>
+	</footer>
+}
+
+templ Button(text string) {
+	<button type="button" class="text-white bg-secondarycolor focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-4 py-2 text-center">{ text }</button>
+}
+
+templ ButtonLink(text string, url string) {
+	<a href={ templ.URL(url) } class="text-white bg-secondarycolor focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-4 py-2 text-center">{ text }</a>
+}
+
+templ MenuCTA(text string, url string) {
+	<a href={ templ.URL(url) } target="_blank" rel="noopener noreferrer" class="block py-2.5 px-5 text-white bg-green-700 rounded hover:bg-green-600 focus:ring-4 focus:ring-green-500 focus:outline-none">{ text }</a>
+}

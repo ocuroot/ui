@@ -1,0 +1,16 @@
+package components
+
+templ Header(title string) {
+	<div class="w-full grid grid-cols-1 gap-4 my-4">
+		<div class="text-xl font-bold">{ title }</div>
+	</div>
+}
+
+templ HeaderWithRHS(title string) {
+	<div class="w-full grid grid-cols-2 gap-4 my-4">
+		<div class="text-xl font-bold">{ title }</div>
+		<div class="justify-self-end">
+			{ children... }
+		</div>
+	</div>
+}

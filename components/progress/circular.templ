@@ -1,0 +1,127 @@
+package progress
+
+import "fmt"
+
+// Status represents the current state of a progress indicator
+type Status string
+
+const (
+	StatusPending  Status = "pending"
+	StatusRunning  Status = "running"
+	StatusComplete Status = "complete"
+	StatusFailed   Status = "failed"
+)
+
+// Gets the appropriate color for a status
+func getStatusColor(status Status) string {
+	switch status {
+	case StatusPending:
+		return "#6b7280" // gray-500
+	case StatusRunning:
+		return "#3b82f6" // blue-500
+	case StatusComplete:
+		return "#22c55e" // green-500
+	case StatusFailed:
+		return "#ef4444" // red-500
+	default:
+		return "#6b7280" // gray-500
+	}
+}
+
+// CircularProgress renders a basic circular progress indicator
+templ CircularProgress(fraction float64, status Status, size int, showIcon bool) {
+	// Ensure valid fraction
+	if fraction < 0 {
+		fraction = 0
+	}
+	if fraction > 1 {
+		fraction = 1
+	}
+	// Default size
+	if size == 0 {
+		size = 24
+	}
+	// Calculate dimensions
+	<div class="inline-flex flex-col items-center">
+		<svg width={ fmt.Sprint(size) } height={ fmt.Sprint(size) } viewBox="0 0 24 24">
+			<!-- Background circle -->
+			<circle cx="12" cy="12" r="10" stroke="#e5e7eb" stroke-width="2.5" fill="none"></circle>
+			if fraction > 0 {
+				<!-- Progress circle -->
+				<circle
+					cx="12"
+					cy="12"
+					r="10"
+					stroke={ getStatusColor(status) }
+					stroke-width="2.5"
+					fill="none"
+					stroke-dasharray={ fmt.Sprintf("%.1f %.1f", fraction*62.83, 62.83) }
+					transform="rotate(-90 12 12)"
+				></circle>
+			}
+			if showIcon {
+				if status == StatusPending {
+					<!-- Pending icon: clock -->
+					<circle cx="12" cy="12" r="6" fill="white" opacity="0.7"></circle>
+					<path d="M12 6v6l4 2" stroke={ getStatusColor(status) } stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+				} else if status == StatusRunning {
+					<!-- Running icon: play -->
+					<circle cx="12" cy="12" r="6" fill="white" opacity="0.7"></circle>
+					<path d="M10 8l6 4-6 4V8z" fill={ getStatusColor(status) }></path>
+				} else if status == StatusComplete {
+					<!-- Complete icon: check -->
+					<circle cx="12" cy="12" r="6" fill="white" opacity="0.7"></circle>
+					<path d="M8 12l3 3 6-6" stroke={ getStatusColor(status) } stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+				} else if status == StatusFailed {
+					<!-- Failed icon: x -->
+					<circle cx="12" cy="12" r="6" fill="white" opacity="0.7"></circle>
+					<path d="M9 9l6 6m0-6l-6 6" stroke={ getStatusColor(status) } stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+				}
+			}
+		</svg>
+	</div>
+}
+
+// CircularProgressWithLabel adds a text label below the progress indicator
+templ CircularProgressWithLabel(fraction float64, status Status, size int, showIcon bool, label string) {
+	<div class="inline-flex flex-col items-center">
+		@CircularProgress(fraction, status, size, showIcon)
+		<span class="text-xs text-gray-600 mt-1">{ label }</span>
+	</div>
+}
+
+// Small variants for different statuses
+templ SmallPending() {
+	@CircularProgress(0, StatusPending, 20, true)
+}
+
+templ SmallRunning(fraction float64) {
+	@CircularProgress(fraction, StatusRunning, 20, true)
+}
+
+templ SmallComplete() {
+	@CircularProgress(1.0, StatusComplete, 20, true)
+}
+
+templ SmallFailed() {
+	@CircularProgress(0.5, StatusFailed, 20, true)
+}
+
+// Medium variants
+templ Progress(fraction float64, status Status) {
+	@CircularProgress(fraction, status, 24, true)
+}
+
+// Large variants
+templ LargeProgress(fraction float64, status Status) {
+	@CircularProgress(fraction, status, 36, true)
+}
+
+// WithLabel variants
+templ ProgressWithLabel(fraction float64, status Status, label string) {
+	@CircularProgressWithLabel(fraction, status, 24, true, label)
+}
+
+templ LargeProgressWithLabel(fraction float64, status Status, label string) {
+	@CircularProgressWithLabel(fraction, status, 36, true, label)
+}

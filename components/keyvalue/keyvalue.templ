@@ -1,0 +1,47 @@
+package keyvalue
+
+import (
+	"sort"
+)
+
+type Pair struct {
+	Key   string
+	Value string
+	Link  templ.SafeURL
+}
+
+templ FromMap(data map[string]string) {
+	@Pairs(sortIntoPairs(data))
+}
+
+templ Pairs(in []Pair) {
+	<table>
+		<tbody>
+			for _, pair := range in {
+				<tr>
+					<td class="pr-8 text-left">
+						<span class="font-bold">{ pair.Key }</span>
+					</td>
+					<td>
+						if pair.Link != "" {
+							<a class="text-blue-500 hover:text-blue-700 hover:underline" href={ pair.Link }>{ pair.Value }</a>
+						} else {
+							{ pair.Value }
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+func sortIntoPairs(data map[string]string) []Pair {
+	var pairs []Pair
+	for key, value := range data {
+		pairs = append(pairs, Pair{Key: key, Value: value})
+	}
+	sort.Slice(pairs, func(i, j int) bool {
+		return pairs[i].Key < pairs[j].Key
+	})
+	return pairs
+}

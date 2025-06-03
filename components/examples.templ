@@ -1,0 +1,30 @@
+package components
+
+import "github.com/ocuroot/ui/components/tabs"
+
+templ Examples() {
+	@Body() {
+		@Container() {
+			@tabs.Tabs(tabs.TabProps{
+				Tabs: []tabs.Tab{
+					{
+						Id:    "tab1",
+						Label: "Tab 1",
+					},
+					{
+						Id:    "tab2",
+						Label: "Tab 2",
+					},
+				},
+			}) {
+				@tabs.TabContent("tab1") {
+					<p>Content for tab 1</p>
+				}
+				@tabs.TabContent("tab2") {
+					<p>Content for tab 2</p>
+				}
+			}
+		}
+		@ScriptsSimple()
+	}
+}

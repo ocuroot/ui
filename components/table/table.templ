@@ -1,0 +1,160 @@
+package table
+
+import "github.com/ocuroot/ui/components/actiondropdown"
+
+type TableProps struct {
+	Columns []string
+}
+
+templ Table(props TableProps, columns ...string) {
+	<table class="w-full text-sm text-left rtl:text-right text-gray-500">
+		<thead class="text-xs text-gray-700 uppercase bg-gray-50">
+			<tr>
+				for _, column := range columns {
+					<th scope="col" class={ tableClasses(column) }>
+						{ column }
+					</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			{ children... }
+		</tbody>
+	</table>
+}
+
+func tableClasses(columnName string) string {
+	if columnName == "Actions" {
+		return "text-right px-6 py-4 overflow-visible"
+	} else {
+		return "px-6 py-4"
+	}
+}
+
+// Status represents a row's status which can be used for coloring
+type Status string
+
+// Status constants for row coloring
+const (
+	StatusDefault  Status = ""
+	StatusPending  Status = "pending"
+	StatusRunning  Status = "running"
+	StatusComplete Status = "complete"
+	StatusFailed   Status = "failed"
+)
+
+// getStatusColorClass returns the appropriate CSS class for background color based on status
+func getStatusColorClass(status Status) string {
+	switch status {
+	case StatusPending:
+		return "bg-gray-50" // Light gray for pending
+	case StatusRunning:
+		return "bg-amber-50" // Amber for running
+	case StatusComplete:
+		return "bg-green-50" // Light green for complete
+	case StatusFailed:
+		return "bg-red-50" // Light red for failed
+	default:
+		return "bg-white" // Default white background
+	}
+}
+
+type TRProps struct {
+	Link   templ.SafeURL
+	Status Status
+	// Directly specify a CSS class for the row background
+	BgColorClass string
+}
+
+script goToLink(event templ.JSExpression, link templ.SafeURL) {
+	window.location.href = link;
+}
+
+func getRowClasses(props TRProps, interactive bool) string {
+	colorClass := "bg-white"
+	if props.Status != "" {
+		colorClass = getStatusColorClass(props.Status)
+	}
+	if props.BgColorClass != "" {
+		colorClass = props.BgColorClass
+	}
+	if interactive {
+		return colorClass + " border-b hover:bg-gray-100 cursor-pointer"
+	}
+	return colorClass + " border-b"
+}
+
+templ Tr(props TRProps) {
+	// Apply different classes based on status and interactive state
+	if props.Link != "" {
+		switch props.Status {
+			case StatusPending:
+				<tr class="bg-gray-50 border-b hover:bg-gray-100 cursor-pointer" onclick={ goToLink(templ.JSExpression("event"), props.Link) }>
+					{ children... }
+				</tr>
+			case StatusRunning:
+				<tr class="bg-amber-50 border-b hover:bg-gray-100 cursor-pointer" onclick={ goToLink(templ.JSExpression("event"), props.Link) }>
+					{ children... }
+				</tr>
+			case StatusComplete:
+				<tr class="bg-green-50 border-b hover:bg-gray-100 cursor-pointer" onclick={ goToLink(templ.JSExpression("event"), props.Link) }>
+					{ children... }
+				</tr>
+			case StatusFailed:
+				<tr class="bg-red-50 border-b hover:bg-gray-100 cursor-pointer" onclick={ goToLink(templ.JSExpression("event"), props.Link) }>
+					{ children... }
+				</tr>
+			default:
+				<tr class="bg-white border-b hover:bg-gray-100 cursor-pointer" onclick={ goToLink(templ.JSExpression("event"), props.Link) }>
+					{ children... }
+				</tr>
+		}
+	} else {
+		switch props.Status {
+			case StatusPending:
+				<tr class="bg-gray-50 border-b">
+					{ children... }
+				</tr>
+			case StatusRunning:
+				<tr class="bg-amber-50 border-b">
+					{ children... }
+				</tr>
+			case StatusComplete:
+				<tr class="bg-green-50 border-b">
+					{ children... }
+				</tr>
+			case StatusFailed:
+				<tr class="bg-red-50 border-b">
+					{ children... }
+				</tr>
+			default:
+				<tr class="bg-white border-b">
+					{ children... }
+				</tr>
+		}
+	}
+}
+
+type TDProps struct {
+	RightAlign bool
+}
+
+templ Td(props TDProps) {
+	if props.RightAlign {
+		<td scope="row" class="text-right px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+			{ children... }
+		</td>
+	} else {
+		<td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+			{ children... }
+		</td>
+	}
+}
+
+templ TdActions(id string) {
+	@Td(TDProps{RightAlign: true}) {
+		@actiondropdown.Actions(id) {
+			{ children... }
+		}
+	}
+}

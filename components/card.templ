@@ -1,0 +1,16 @@
+package components
+
+import "strings"
+
+func addClasses(defaults string, classes []string) string {
+	if len(classes) > 0 {
+		return defaults + " " + strings.Join(classes, " ")
+	}
+	return defaults
+}
+
+templ Card(class ...string) {
+	<div class={ addClasses("block p-6 mr-4 mb-4 bg-white border border-gray-200 rounded-lg shadow", class) }>
+		{ children... }
+	</div>
+}
