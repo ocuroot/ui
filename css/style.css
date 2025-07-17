@@ -1,0 +1,62 @@
+
+body {
+    background: #242526;
+    /*background: linear-gradient(171deg, rgba(0, 0, 0, 1) 0%, rgba(2, 70, 1, 1) 93%, rgba(2, 70, 1, 1) 96%);*/
+
+    color: #F0F0F0;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+}
+
+div.cut {
+    height: 300px;
+    background: red;
+    position: relative;
+}
+
+div.cut:before {
+    content: '';
+    background: #242526;
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 80px solid #242526;
+    border-left: 80px solid red;
+    width: 0;
+}
+
+.button {
+    width: 100px;
+    padding: 20px;
+    color: black;
+    background-color: white;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px));
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &::after {
+        content: "";
+        background-color: gray;
+        position: absolute;
+        top: 1px;
+        left: 1px;
+
+        width: calc(100% - 2px);
+        height: calc(100% - 2px);
+
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px));
+        z-index: -1;
+    }
+
+    &:hover {
+        background-color: lightgray;
+        cursor: pointer;
+
+        &::after {
+            background-color: lightgray;
+        }
+    }
+}

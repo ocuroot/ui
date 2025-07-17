@@ -1,0 +1,63 @@
+package main
+
+import (
+    "github.com/ocuroot/ui/components/card"
+    "github.com/ocuroot/ui/components/grid"
+    "github.com/ocuroot/ui/components/buttons"
+)
+
+var red string = "#ff0000"
+
+css header() {
+    color: { red };
+}
+
+templ Showcase() {
+    <html>
+        <head>
+            <title>UI Showcase</title>
+            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="styles/templ.css">
+        </head>
+        <body>
+            <h1 class={ header() }>UI Showcase</h1>
+            <p>This is a showcase of the UI components.</p>
+            <p>Another line here</p>
+            <p>Even more</p>
+            @card.Card("Card") {
+                Card body
+            }
+
+            <div class="cut">Cut corner</div>
+
+            @grid.Grid() {
+                @card.Card("Card1") {
+                    Card body
+                }
+                @card.Card("Card2") {
+                    Card body
+                }
+                @card.Card("Card3") {
+                    Card body
+                }
+                @card.Card("Card4") {
+                    Card body
+                }
+                @card.Card("Card5") {
+                    Card body
+                }
+                @card.Card("Card6") {
+                    Card body
+                }
+                @card.Card("Card7") {
+                    Card body
+                }
+                @card.Card("Card8") {
+                    Card body
+                }
+            }
+
+            @buttons.Button("Button")
+        </body>
+    </html>
+}

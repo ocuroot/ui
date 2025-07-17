@@ -1,0 +1,22 @@
+package grid
+
+func AllCSS() []templ.CSSClass {
+    return []templ.CSSClass{
+        gridContainer(),
+    }
+}
+
+css gridContainer() {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    column-gap: 1rem;
+    row-gap: 1rem;
+    margin: 1rem;
+}
+
+templ Grid() {
+    <div class={ gridContainer() }>
+        { children... }
+    </div>
+}
