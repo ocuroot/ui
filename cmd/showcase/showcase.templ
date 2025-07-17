@@ -22,8 +22,15 @@ templ Showcase() {
         <body>
             <h1 class={ header() }>UI Showcase</h1>
             <p>This is a showcase of the UI components.</p>
-            <p>Another line here</p>
-            <p>Even more</p>
+            
+            <div class="p-4 bg-surface border rounded-lg mb-4">
+                <h2 class="text-xl font-semibold mb-2">Component Showcases</h2>
+                <div class="space-x-4">
+                    <a href="/modal" class="bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600">Modal Components</a>
+                    <a href="/table" class="bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600">Table Components</a>
+                    <a href="/components" class="bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600">All Components</a>
+                </div>
+            </div>
             @card.Card("Card") {
                 Card body
             }

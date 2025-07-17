@@ -69,7 +69,7 @@ func Showcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\">UI Showcase</h1><p>This is a showcase of the UI components.</p><p>Another line here</p><p>Even more</p>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\">UI Showcase</h1><p>This is a showcase of the UI components.</p><div class=\"p-4 bg-surface border rounded-lg mb-4\"><h2 class=\"text-xl font-semibold mb-2\">Component Showcases</h2><div class=\"space-x-4\"><a href=\"/modal\" class=\"bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600\">Modal Components</a> <a href=\"/table\" class=\"bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600\">Table Components</a> <a href=\"/components\" class=\"bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600\">All Components</a></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

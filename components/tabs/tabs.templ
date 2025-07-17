@@ -3,8 +3,8 @@ package tabs
 import "fmt"
 
 templ TabButtonBar() {
-	<div class="mb-4 border-b border-gray-200">
-		<ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" role="tablist">
+	<div class="mb-4 border-b">
+		<ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-primary" id="default-tab" role="tablist">
 			{ children... }
 		</ul>
 	</div>
@@ -16,7 +16,7 @@ script pushModalState(id string) {
 
 templ TabButton(id, label string, selected bool) {
 	<button
-		class="inline-block mr-1 p-3 bg-gray-100 border-x-1 rounded-t lg:rounded-t-lg hover:text-gray-600 hover:border-b-gray-700 hover:border-b-2"
+		class="inline-block mr-1 p-3 bg-secondary border-x-1 rounded-t lg:rounded-t-lg hover:text-secondary hover:border-b-primary hover:border-b-2"
 		id={ fmt.Sprintf("%v-tab", id) }
 		data-tabs-target={ fmt.Sprintf("#%v", id) }
 		data-tab-id={ id }
@@ -37,7 +37,7 @@ templ TabContents() {
 }
 
 templ TabContent(id string) {
-	<div id={ id } class="hidden p-2" role="tabpanel" aria-labelledby="{ id }-tab">
+	<div id={ id } class="hidden p-2 text-primary" role="tabpanel" aria-labelledby="{ id }-tab">
 		{ children... }
 	</div>
 }
@@ -79,14 +79,14 @@ templ Tabs(props TabProps) {
                 // Update button states
                 document.querySelectorAll('[role="tab"]').forEach(tab => {
                     tab.setAttribute('aria-selected', 'false');
-                    tab.classList.add('border-b-white');
-                    tab.classList.remove('border-black', 'text-black', 'border-b-black');
+                    tab.classList.add('border-b-surface');
+                    tab.classList.remove('border-primary', 'text-primary', 'border-b-primary');
                 });
                 const button = document.getElementById(tabId + '-tab');
                 if (button) {
                     button.setAttribute('aria-selected', 'true');
-                    button.classList.remove('border-b-white');
-                    button.classList.add('border-black', 'text-black', 'border-b-black');
+                    button.classList.remove('border-b-surface');
+                    button.classList.add('border-primary', 'text-primary', 'border-b-primary');
                 }
             }
         

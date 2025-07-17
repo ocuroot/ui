@@ -31,7 +31,7 @@ func TabButtonBar() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"mb-4 border-b border-gray-200\"><ul class=\"flex flex-wrap -mb-px text-sm font-medium text-center\" id=\"default-tab\" role=\"tablist\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"mb-4 border-b\"><ul class=\"flex flex-wrap -mb-px text-sm font-medium text-center text-primary\" id=\"default-tab\" role=\"tablist\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -82,7 +82,7 @@ func TabButton(id, label string, selected bool) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<button class=\"inline-block mr-1 p-3 bg-gray-100 border-x-1 rounded-t lg:rounded-t-lg hover:text-gray-600 hover:border-b-gray-700 hover:border-b-2\" id=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<button class=\"inline-block mr-1 p-3 bg-secondary border-x-1 rounded-t lg:rounded-t-lg hover:text-secondary hover:border-b-primary hover:border-b-2\" id=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -248,7 +248,7 @@ func TabContent(id string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" class=\"hidden p-2\" role=\"tabpanel\" aria-labelledby=\"{ id }-tab\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" class=\"hidden p-2 text-primary\" role=\"tabpanel\" aria-labelledby=\"{ id }-tab\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -322,7 +322,7 @@ func Tabs(props TabProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<script>\n        document.addEventListener('DOMContentLoaded', function() {\n            function showTab(tabId) {\n                // Hide all tab panels\n                document.querySelectorAll('[role=\"tabpanel\"]').forEach(panel => {\n                    panel.classList.add('hidden');\n                });\n                // Show the selected tab panel\n                const panel = document.getElementById(tabId);\n                if (panel) {\n                    panel.classList.remove('hidden');\n                    // Trigger HTMX load if content hasn't been loaded yet\n                    const content = panel.querySelector('[hx-get]');\n                    if (content && !content.getAttribute('data-loaded')) {\n                        htmx.trigger(content, 'load');\n                        content.setAttribute('data-loaded', 'true');\n                    }\n                }\n                // Update button states\n                document.querySelectorAll('[role=\"tab\"]').forEach(tab => {\n                    tab.setAttribute('aria-selected', 'false');\n                    tab.classList.add('border-b-white');\n                    tab.classList.remove('border-black', 'text-black', 'border-b-black');\n                });\n                const button = document.getElementById(tabId + '-tab');\n                if (button) {\n                    button.setAttribute('aria-selected', 'true');\n                    button.classList.remove('border-b-white');\n                    button.classList.add('border-black', 'text-black', 'border-b-black');\n                }\n            }\n        \n            // Add click handlers to tabs\n            document.querySelectorAll('[role=\"tab\"]').forEach(tab => {\n                tab.addEventListener('click', function(e) {\n                    const tabId = this.getAttribute('data-tabs-target').substring(1);\n                    showTab(tabId);\n                });\n\n                if (tab.getAttribute('aria-selected') == \"true\") {\n                    const tabId = tab.getAttribute('data-tabs-target').substring(1);\n                    showTab(tabId);\n                }\n            });\n\n            // Show initial tab\n            const urlParams = new URLSearchParams(window.location.search);\n            var defaultTab = urlParams.get('tab') || undefined;\n            if (defaultTab) {\n                showTab(defaultTab);\n            }\n        });\n    </script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<script>\n        document.addEventListener('DOMContentLoaded', function() {\n            function showTab(tabId) {\n                // Hide all tab panels\n                document.querySelectorAll('[role=\"tabpanel\"]').forEach(panel => {\n                    panel.classList.add('hidden');\n                });\n                // Show the selected tab panel\n                const panel = document.getElementById(tabId);\n                if (panel) {\n                    panel.classList.remove('hidden');\n                    // Trigger HTMX load if content hasn't been loaded yet\n                    const content = panel.querySelector('[hx-get]');\n                    if (content && !content.getAttribute('data-loaded')) {\n                        htmx.trigger(content, 'load');\n                        content.setAttribute('data-loaded', 'true');\n                    }\n                }\n                // Update button states\n                document.querySelectorAll('[role=\"tab\"]').forEach(tab => {\n                    tab.setAttribute('aria-selected', 'false');\n                    tab.classList.add('border-b-surface');\n                    tab.classList.remove('border-primary', 'text-primary', 'border-b-primary');\n                });\n                const button = document.getElementById(tabId + '-tab');\n                if (button) {\n                    button.setAttribute('aria-selected', 'true');\n                    button.classList.remove('border-b-surface');\n                    button.classList.add('border-primary', 'text-primary', 'border-b-primary');\n                }\n            }\n        \n            // Add click handlers to tabs\n            document.querySelectorAll('[role=\"tab\"]').forEach(tab => {\n                tab.addEventListener('click', function(e) {\n                    const tabId = this.getAttribute('data-tabs-target').substring(1);\n                    showTab(tabId);\n                });\n\n                if (tab.getAttribute('aria-selected') == \"true\") {\n                    const tabId = tab.getAttribute('data-tabs-target').substring(1);\n                    showTab(tabId);\n                }\n            });\n\n            // Show initial tab\n            const urlParams = new URLSearchParams(window.location.search);\n            var defaultTab = urlParams.get('tab') || undefined;\n            if (defaultTab) {\n                showTab(defaultTab);\n            }\n        });\n    </script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

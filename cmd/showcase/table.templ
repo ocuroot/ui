@@ -1,0 +1,186 @@
+package main
+
+import (
+	"github.com/ocuroot/ui/components"
+	"github.com/ocuroot/ui/components/table"
+)
+
+templ TableShowcase() {
+	@components.RootSimple(nil, "Table Showcase") {
+		@components.Section() {
+			<h2 class="text-2xl font-semibold mb-4">Table Examples</h2>
+			<div class="space-y-8">
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Basic Table</h3>
+					@table.Table(table.TableProps{Columns: []string{"Name", "Email", "Role"}}, "Name", "Email", "Role") {
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								John Doe
+							}
+							@table.Td(table.TDProps{}) {
+								john@example.com
+							}
+							@table.Td(table.TDProps{}) {
+								Admin
+							}
+						}
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								Jane Smith
+							}
+							@table.Td(table.TDProps{}) {
+								jane@example.com
+							}
+							@table.Td(table.TDProps{}) {
+								User
+							}
+						}
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								Bob Johnson
+							}
+							@table.Td(table.TDProps{}) {
+								bob@example.com
+							}
+							@table.Td(table.TDProps{}) {
+								Editor
+							}
+						}
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Interactive Table with Links</h3>
+					@table.Table(table.TableProps{Columns: []string{"Project", "Status", "Actions"}}, "Project", "Status", "Actions") {
+						@table.Tr(table.TRProps{Link: templ.SafeURL("/project/1")}) {
+							@table.Td(table.TDProps{}) {
+								Website Redesign
+							}
+							@table.Td(table.TDProps{}) {
+								Complete
+							}
+							@table.Td(table.TDProps{RightAlign: true}) {
+								<button class="text-blue-600 hover:text-blue-800">View</button>
+							}
+						}
+						@table.Tr(table.TRProps{Link: templ.SafeURL("/project/2")}) {
+							@table.Td(table.TDProps{}) {
+								Mobile App
+							}
+							@table.Td(table.TDProps{}) {
+								In Progress
+							}
+							@table.Td(table.TDProps{RightAlign: true}) {
+								<button class="text-blue-600 hover:text-blue-800">View</button>
+							}
+						}
+						@table.Tr(table.TRProps{Link: templ.SafeURL("/project/3")}) {
+							@table.Td(table.TDProps{}) {
+								API Documentation
+							}
+							@table.Td(table.TDProps{}) {
+								Pending
+							}
+							@table.Td(table.TDProps{RightAlign: true}) {
+								<button class="text-blue-600 hover:text-blue-800">View</button>
+							}
+						}
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Table with Actions</h3>
+					@table.Table(table.TableProps{Columns: []string{"Name", "Type", "Size", "Actions"}}, "Name", "Type", "Size", "Actions") {
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								document.pdf
+							}
+							@table.Td(table.TDProps{}) {
+								PDF
+							}
+							@table.Td(table.TDProps{}) {
+								2.1 MB
+							}
+							@table.TdActions("file-1") {
+								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Download</button>
+								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Rename</button>
+								<button class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Delete</button>
+							}
+						}
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								image.png
+							}
+							@table.Td(table.TDProps{}) {
+								PNG
+							}
+							@table.Td(table.TDProps{}) {
+								856 KB
+							}
+							@table.TdActions("file-2") {
+								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Download</button>
+								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Rename</button>
+								<button class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Delete</button>
+							}
+						}
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Table with Pagination</h3>
+					@table.Table(table.TableProps{Columns: []string{"ID", "Name", "Created", "Status"}}, "ID", "Name", "Created", "Status") {
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								001
+							}
+							@table.Td(table.TDProps{}) {
+								First Item
+							}
+							@table.Td(table.TDProps{}) {
+								2024-01-15
+							}
+							@table.Td(table.TDProps{}) {
+								Active
+							}
+						}
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								002
+							}
+							@table.Td(table.TDProps{}) {
+								Second Item
+							}
+							@table.Td(table.TDProps{}) {
+								2024-01-16
+							}
+							@table.Td(table.TDProps{}) {
+								Processing
+							}
+						}
+						@table.Tr(table.TRProps{}) {
+							@table.Td(table.TDProps{}) {
+								003
+							}
+							@table.Td(table.TDProps{}) {
+								Third Item
+							}
+							@table.Td(table.TDProps{}) {
+								2024-01-17
+							}
+							@table.Td(table.TDProps{}) {
+								Pending
+							}
+						}
+					}
+					@table.Pagination(table.PaginationProps{
+						BaseURL: "/table-showcase",
+						Offset:  0,
+						Limit:   10,
+						Total:   50,
+						Target:  "",
+					})
+				</div>
+			</div>
+		}
+	}
+}

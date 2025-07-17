@@ -12,14 +12,14 @@ templ Modal(id string, title string, size ...string) {
 		role="dialog"
 		aria-modal="true"
 	>
-		<div class={ fmt.Sprintf("bg-white rounded-lg shadow-xl p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 %s", getModalSizeClass(sizeFromVariadic(size...))) }>
+		<div class={ fmt.Sprintf("bg-surface rounded-lg shadow-xl p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 %s", getModalSizeClass(sizeFromVariadic(size...))) }>
 			<div class="flex justify-between items-center mb-4">
-				<h2 class="text-lg font-semibold text-gray-800">
+				<h2 class="text-lg font-semibold text-primary">
 					{ title }
 				</h2>
 				<button
 					onclick={ CloseModal(id) }
-					class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full p-1"
+					class="text-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full p-1"
 					aria-label="Close modal"
 				>
 					<svg
@@ -40,7 +40,7 @@ templ Modal(id string, title string, size ...string) {
 			</div>
 			<div
 				id={ fmt.Sprintf("%s-content", id) }
-				class="space-y-2 max-h-[80vh] overflow-y-auto"
+				class="space-y-2 max-h-80vh overflow-y-auto"
 			>
 				{ children... }
 			</div>
@@ -133,7 +133,7 @@ func getModalSizeClass(size string) string {
 	case "xl":
 		return "w-full max-w-xl"
 	case "full":
-		return "w-[calc(100%-4rem)] h-[calc(100%-4rem)] max-w-[calc(100%-4rem)] max-h-[calc(100%-4rem)] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-white rounded-lg shadow-xl"
+		return "w-calc-100-4rem h-calc-100-4rem max-w-calc-100-4rem max-h-calc-100-4rem top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 bg-surface rounded-lg shadow-xl"
 	default:
 		return "w-full max-w-lg"
 	}

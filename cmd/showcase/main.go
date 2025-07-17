@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ"
+	"github.com/ocuroot/ui/assets"
 	"github.com/ocuroot/ui/components/card"
 	"github.com/ocuroot/ui/components/grid"
 	"github.com/ocuroot/ui/css"
@@ -23,9 +24,33 @@ func main() {
 		showcase := Showcase()
 		showcase.Render(r.Context(), w)
 	})
+	http.HandleFunc("/modal", func(w http.ResponseWriter, r *http.Request) {
+		modalShowcase := ModalShowcase()
+		modalShowcase.Render(r.Context(), w)
+	})
+	http.HandleFunc("/table", func(w http.ResponseWriter, r *http.Request) {
+		tableShowcase := TableShowcase()
+		tableShowcase.Render(r.Context(), w)
+	})
+	http.HandleFunc("/components", func(w http.ResponseWriter, r *http.Request) {
+		componentsShowcase := ComponentsShowcase()
+		componentsShowcase.Render(r.Context(), w)
+	})
 	http.HandleFunc("/style.css", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css; charset=utf-8")
 		w.Write(css.Style)
+	})
+	http.HandleFunc("/static/logo.svg", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Write([]byte(assets.Logo))
+	})
+	http.HandleFunc("/static/anon_user.svg", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Write(assets.AnonUser)
+	})
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/x-icon")
+		w.Write(assets.Favicon)
 	})
 
 	srv := &http.Server{

@@ -8,29 +8,29 @@ import (
 )
 
 templ RoundFailed(msg string) {
-	<span class="bg-red-100 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-full me-1 border border-gray-500">
+	<span class="badge-error text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-full me-1 border border">
 		@icons.X()
 		{ msg }
 	</span>
 }
 
 templ RoundPending(msg string) {
-	<span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-full mb-2 me-1 border border-gray-500">
+	<span class="badge-neutral text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-full mb-2 me-1 border border">
 		@icons.Clock()
 		{ msg }
 	</span>
 }
 
 templ Pending(msg string) {
-	<span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border-gray-500">
+	<span class="badge-neutral text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border">
 		@icons.Clock()
 		{ msg }
 	</span>
 }
 
 templ Stale(msg string) {
-	<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border-gray-500">
-		<svg class="w-3 h-3 me-1.5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+	<span class="badge-success text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border">
+		<svg class="w-3 h-3 me-1.5 text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.119 8h9.762a1 1 0 0 1 .772 1.636l-4.881 5.927a1 1 0 0 1-1.544 0l-4.88-5.927A1 1 0 0 1 7.118 8Z"></path>
 		</svg>
 		{ msg }
@@ -38,8 +38,8 @@ templ Stale(msg string) {
 }
 
 templ Redeploy(msg string) {
-	<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border-gray-500">
-		<svg class="w-3 h-3 me-1.5 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+	<span class="badge-success text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border">
+		<svg class="w-3 h-3 me-1.5 text-primary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
 		</svg>
 		{ msg }
@@ -47,21 +47,21 @@ templ Redeploy(msg string) {
 }
 
 templ RoundLive(msg string) {
-	<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-full mb-2 me-2 border border-gray-500">
+	<span class="badge-success text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-full mb-2 me-2 border border">
 		@icons.Check()
 		{ msg }
 	</span>
 }
 
 templ Live(msg string) {
-	<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border-gray-500">
+	<span class="badge-success text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mb-2 me-2 border border">
 		@icons.Check()
 		{ msg }
 	</span>
 }
 
 templ Default(text string) {
-	<span class="bg-gray-100 text-gray-800 text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded">{ text }</span>
+	<span class="badge-neutral text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded">{ text }</span>
 }
 
 func ToolTipID() string {
@@ -71,7 +71,7 @@ func ToolTipID() string {
 
 templ HasPatch() {
 	<span
-		class="bg-yellow-100 text-yellow-800 text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded"
+		class="badge-warning text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded"
 		title="This commit has uncommitted changes"
 	>
 		+patch
@@ -79,41 +79,41 @@ templ HasPatch() {
 }
 
 templ Warning(text string) {
-	<span class="bg-yellow-100 text-yellow-800 text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded">{ text }</span>
+	<span class="badge-warning text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded">{ text }</span>
 }
 
 templ Checks(met, total int) {
-	<span class="bg-yellow-100 text-yellow-800 text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded-full">{ fmt.Sprint(met) }/{ fmt.Sprint(total) } criteria met</span>
+	<span class="badge-warning text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded-full">{ fmt.Sprint(met) }/{ fmt.Sprint(total) } criteria met</span>
 }
 
 templ CountPositive(total int, msg string) {
-	<span class="bg-green-100 text-green-800 text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded-full">
+	<span class="badge-success text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded-full">
 		{ fmt.Sprint(total) }
 		{ msg }
 	</span>
 }
 
 templ CountNeutral(total int, msg string) {
-	<span class="bg-blue-100 text-blue-800 text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded-full">
+	<span class="badge-info text-xs font-medium mb-2 me-2 px-2.5 py-0.5 rounded-full">
 		{ fmt.Sprint(total) }
 		{ msg }
 	</span>
 }
 
 templ Positive(msg string) {
-	<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
+	<span class="badge-success text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border ">
 		{ msg }
 	</span>
 }
 
 templ Neutral(msg string) {
-	<span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
+	<span class="badge-info text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border ">
 		{ msg }
 	</span>
 }
 
 templ Negative(msg string) {
-	<span class="bg-red-100 text-red-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-500 ">
+	<span class="badge-error text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border ">
 		{ msg }
 	</span>
 }

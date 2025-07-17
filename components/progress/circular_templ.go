@@ -20,19 +20,19 @@ const (
 	StatusFailed   Status = "failed"
 )
 
-// Gets the appropriate color for a status
-func getStatusColor(status Status) string {
+// Gets the appropriate CSS variable for a status
+func getStatusColorVar(status Status) string {
 	switch status {
 	case StatusPending:
-		return "#6b7280" // gray-500
+		return "var(--progress-pending)"
 	case StatusRunning:
-		return "#3b82f6" // blue-500
+		return "var(--progress-running)"
 	case StatusComplete:
-		return "#22c55e" // green-500
+		return "var(--progress-complete)"
 	case StatusFailed:
-		return "#ef4444" // red-500
+		return "var(--progress-failed)"
 	default:
-		return "#6b7280" // gray-500
+		return "var(--progress-pending)"
 	}
 }
 
@@ -102,7 +102,7 @@ func CircularProgress(fraction float64, status Status, size int, showIcon bool) 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" viewBox=\"0 0 24 24\"><!-- Background circle --><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"#e5e7eb\" stroke-width=\"2.5\" fill=\"none\"></circle> ")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" viewBox=\"0 0 24 24\"><!-- Background circle --><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"var(--progress-bg)\" stroke-width=\"2.5\" fill=\"none\"></circle> ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -112,9 +112,9 @@ func CircularProgress(fraction float64, status Status, size int, showIcon bool) 
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 string
-			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColor(status))
+			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColorVar(status))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 55, Col: 36}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 55, Col: 39}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -145,9 +145,9 @@ func CircularProgress(fraction float64, status Status, size int, showIcon bool) 
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var6 string
-				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColor(status))
+				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColorVar(status))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 66, Col: 58}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 66, Col: 61}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
@@ -163,9 +163,9 @@ func CircularProgress(fraction float64, status Status, size int, showIcon bool) 
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var7 string
-				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColor(status))
+				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColorVar(status))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 70, Col: 61}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 70, Col: 64}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
@@ -181,9 +181,9 @@ func CircularProgress(fraction float64, status Status, size int, showIcon bool) 
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var8 string
-				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColor(status))
+				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColorVar(status))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 74, Col: 60}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 74, Col: 63}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 				if templ_7745c5c3_Err != nil {
@@ -199,9 +199,9 @@ func CircularProgress(fraction float64, status Status, size int, showIcon bool) 
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var9 string
-				templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColor(status))
+				templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(getStatusColorVar(status))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 78, Col: 64}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 78, Col: 67}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 				if templ_7745c5c3_Err != nil {
@@ -251,14 +251,14 @@ func CircularProgressWithLabel(fraction float64, status Status, size int, showIc
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<span class=\"text-xs text-gray-600 mt-1\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<span class=\"text-xs text-secondary mt-1\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 89, Col: 50}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/progress/circular.templ`, Line: 89, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {

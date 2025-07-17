@@ -1,0 +1,129 @@
+package main
+
+import (
+	"github.com/ocuroot/ui/components"
+	"github.com/ocuroot/ui/components/table"
+)
+
+templ ModalShowcase() {
+	@components.RootSimple(nil, "Modal Showcase") {
+		@components.Section() {
+			<h2 class="text-2xl font-semibold mb-4">Modal Examples</h2>
+			<div class="space-y-4">
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-2">Small Modal</h3>
+					<button onclick={ components.OpenModal("small-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
+						Open Small Modal
+					</button>
+					@components.Modal("small-modal", "Small Modal", "sm") {
+						<p>This is a small modal example with basic content.</p>
+						<p>It demonstrates the smallest modal size available.</p>
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-2">Medium Modal</h3>
+					<button onclick={ components.OpenModal("medium-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
+						Open Medium Modal
+					</button>
+					@components.Modal("medium-modal", "Medium Modal", "md") {
+						<p>This is a medium-sized modal with more content space.</p>
+						<p>Perfect for forms or detailed information.</p>
+						<div class="mt-4 p-3 bg-blue-50 rounded">
+							<p class="text-sm">This is an info box inside the modal.</p>
+						</div>
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-2">Large Modal (Default)</h3>
+					<button onclick={ components.OpenModal("large-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
+						Open Large Modal
+					</button>
+					@components.Modal("large-modal", "Large Modal") {
+						<p>This is a large modal, which is the default size.</p>
+						<p>It provides plenty of space for complex content.</p>
+						<div class="mt-4 space-y-2">
+							<div class="p-3 bg-green-50 rounded">
+								<p class="text-sm font-medium">Success Message</p>
+								<p class="text-sm">This is a success notification inside the modal.</p>
+							</div>
+							<div class="p-3 bg-amber-50 rounded">
+								<p class="text-sm font-medium">Warning Message</p>
+								<p class="text-sm">This is a warning notification inside the modal.</p>
+							</div>
+						</div>
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-2">Extra Large Modal</h3>
+					<button onclick={ components.OpenModal("xl-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
+						Open XL Modal
+					</button>
+					@components.Modal("xl-modal", "Extra Large Modal", "xl") {
+						<p>This is an extra large modal for extensive content.</p>
+						<div class="mt-4">
+							<h4 class="font-semibold mb-2">Features:</h4>
+							<ul class="space-y-1">
+								<li>• Responsive design</li>
+								<li>• Keyboard navigation (ESC to close)</li>
+								<li>• Click outside to close</li>
+								<li>• Customizable sizes</li>
+								<li>• Scrollable content</li>
+							</ul>
+						</div>
+						<div class="mt-4 p-4 bg-gray-100 rounded">
+							<p class="text-sm">This modal demonstrates scrollable content when the content exceeds the available space.</p>
+						</div>
+					}
+				</div>
+
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-2">Modal with Table</h3>
+					<button onclick={ components.OpenModal("table-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
+						Open Table Modal
+					</button>
+					@components.Modal("table-modal", "Data Table", "xl") {
+						<p class="mb-4">This modal contains a data table demonstrating how tables work within modals.</p>
+						@table.Table(table.TableProps{Columns: []string{"Name", "Status", "Actions"}}, "Name", "Status", "Actions") {
+							@table.Tr(table.TRProps{}) {
+								@table.Td(table.TDProps{}) {
+									Task 1
+								}
+								@table.Td(table.TDProps{}) {
+									Complete
+								}
+								@table.Td(table.TDProps{RightAlign: true}) {
+									<button class="text-blue-600 hover:text-blue-800">View</button>
+								}
+							}
+							@table.Tr(table.TRProps{}) {
+								@table.Td(table.TDProps{}) {
+									Task 2
+								}
+								@table.Td(table.TDProps{}) {
+									Running
+								}
+								@table.Td(table.TDProps{RightAlign: true}) {
+									<button class="text-blue-600 hover:text-blue-800">View</button>
+								}
+							}
+							@table.Tr(table.TRProps{}) {
+								@table.Td(table.TDProps{}) {
+									Task 3
+								}
+								@table.Td(table.TDProps{}) {
+									Failed
+								}
+								@table.Td(table.TDProps{RightAlign: true}) {
+									<button class="text-blue-600 hover:text-blue-800">View</button>
+								}
+							}
+						}
+					}
+				</div>
+			</div>
+		}
+	}
+}

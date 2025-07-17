@@ -10,46 +10,46 @@ templ Pagination(props PaginationProps) {
 			<li>
 				if props.Offset > 0 {
 					if props.Target != "" {
-						<a hx-get={ fmt.Sprintf("%s?offset=0", props.BaseURL) } hx-target={ props.Target } class="flex items-center rounded-s-lg justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">First</a>
+						<a hx-get={ fmt.Sprintf("%s?offset=0", props.BaseURL) } hx-target={ props.Target } class="flex items-center rounded-s-lg justify-center px-3 h-8 ms-0 leading-tight text-secondary bg-surface border border-e-0 border hover:bg-secondary hover:text-primary cursor-pointer">First</a>
 					} else {
-						<a href={ templ.URL(fmt.Sprintf("%s?offset=0", props.BaseURL)) } class="flex items-center rounded-s-lg justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">First</a>
+						<a href={ templ.URL(fmt.Sprintf("%s?offset=0", props.BaseURL)) } class="flex items-center rounded-s-lg justify-center px-3 h-8 ms-0 leading-tight text-secondary bg-surface border border-e-0 border hover:bg-secondary hover:text-primary cursor-pointer">First</a>
 					}
 				} else {
-					<span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-gray-200 border border-gray-300 rounded-s-lg opacity-50">First</span>
+					<span class="flex items-center justify-center px-3 h-8 leading-tight text-muted bg-secondary border rounded-s-lg opacity-50">First</span>
 				}
 			</li>
 			<li>
 				if props.Offset > 0 {
 					if props.Target != "" {
-						<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset-props.Limit) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">Previous</a>
+						<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset-props.Limit) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-secondary bg-surface border border-e-0 border hover:bg-secondary hover:text-primary cursor-pointer">Previous</a>
 					} else {
-						<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset-props.Limit)) } class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">Previous</a>
+						<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset-props.Limit)) } class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-secondary bg-surface border border-e-0 border hover:bg-secondary hover:text-primary cursor-pointer">Previous</a>
 					}
 				} else {
-					<span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-gray-200 border border-gray-300 opacity-50">Previous</span>
+					<span class="flex items-center justify-center px-3 h-8 leading-tight text-muted bg-secondary border opacity-50">Previous</span>
 				}
 			</li>
 			@PaginationLinks(props, CreatePaginationLinks(props))
 			<li>
 				if props.Offset + props.Limit < props.Total {
 					if props.Target != "" {
-						<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset+props.Limit) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">Next</a>
+						<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset+props.Limit) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 leading-tight text-secondary bg-surface border hover:bg-secondary hover:text-primary cursor-pointer">Next</a>
 					} else {
-						<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset+props.Limit)) } class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">Next</a>
+						<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, props.Offset+props.Limit)) } class="flex items-center justify-center px-3 h-8 leading-tight text-secondary bg-surface border hover:bg-secondary hover:text-primary cursor-pointer">Next</a>
 					}
 				} else {
-					<span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-gray-200 border border-gray-300 opacity-50">Next</span>
+					<span class="flex items-center justify-center px-3 h-8 leading-tight text-muted bg-secondary border opacity-50">Next</span>
 				}
 			</li>
 			<li>
 				if props.Offset + props.Limit < props.Total {
 					if props.Target != "" {
-						<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, ((props.Total-1)/props.Limit)*props.Limit) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 cursor-pointer">Last</a>
+						<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, ((props.Total-1)/props.Limit)*props.Limit) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 leading-tight text-secondary bg-surface border rounded-e-lg hover:bg-secondary hover:text-primary cursor-pointer">Last</a>
 					} else {
-						<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, ((props.Total-1)/props.Limit)*props.Limit)) } class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 cursor-pointer">Last</a>
+						<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, ((props.Total-1)/props.Limit)*props.Limit)) } class="flex items-center justify-center px-3 h-8 leading-tight text-secondary bg-surface border rounded-e-lg hover:bg-secondary hover:text-primary cursor-pointer">Last</a>
 					}
 				} else {
-					<span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-400 bg-gray-200 border border-gray-300 rounded-e-lg opacity-50">Last</span>
+					<span class="flex items-center justify-center px-3 h-8 leading-tight text-muted bg-secondary border rounded-e-lg opacity-50">Last</span>
 				}
 			</li>
 		</ul>
@@ -60,12 +60,12 @@ templ PaginationLinks(props PaginationProps, links []PaginationLink) {
 	for _, link := range links {
 		<li>
 			if link.Active {
-				<a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 cursor-pointer">{ fmt.Sprint(link.PageNumber+1) }</a>
+				<a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-primary border border bg-secondary hover:bg-primary hover:text-white cursor-pointer">{ fmt.Sprint(link.PageNumber+1) }</a>
 			} else {
 				if props.Target != "" {
-					<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, link.Offset) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">{ fmt.Sprint(link.PageNumber+1) }</a>
+					<a hx-get={ fmt.Sprintf("%s?offset=%d", props.BaseURL, link.Offset) } hx-target={ props.Target } class="flex items-center justify-center px-3 h-8 leading-tight text-secondary bg-surface border hover:bg-secondary hover:text-primary cursor-pointer">{ fmt.Sprint(link.PageNumber+1) }</a>
 				} else {
-					<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, link.Offset)) } class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">{ fmt.Sprint(link.PageNumber+1) }</a>
+					<a href={ templ.URL(fmt.Sprintf("%s?offset=%d", props.BaseURL, link.Offset)) } class="flex items-center justify-center px-3 h-8 leading-tight text-secondary bg-surface border hover:bg-secondary hover:text-primary cursor-pointer">{ fmt.Sprint(link.PageNumber+1) }</a>
 				}
 			}
 		</li>

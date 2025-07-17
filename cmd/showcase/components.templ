@@ -1,0 +1,149 @@
+package main
+
+import (
+	"github.com/ocuroot/ui/components"
+	"github.com/ocuroot/ui/components/tabs"
+	"github.com/ocuroot/ui/components/badges"
+	"github.com/ocuroot/ui/components/progress"
+	"github.com/ocuroot/ui/components/links"
+	"github.com/ocuroot/ui/components/icons"
+)
+
+templ ComponentsShowcase() {
+	@components.RootSimple(nil, "Components Showcase") {
+		@components.Section() {
+			<h2 class="text-2xl font-semibold mb-4">All Components</h2>
+			<div class="space-y-8">
+				
+				<!-- Tabs Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Tabs</h3>
+					@tabs.TabButtonBar() {
+						@tabs.TabButton("tab1", "First Tab", true)
+						@tabs.TabButton("tab2", "Second Tab", false)
+						@tabs.TabButton("tab3", "Third Tab", false)
+					}
+					@tabs.TabContents() {
+						@tabs.TabContent("tab1") {
+							<p>This is the content of the first tab.</p>
+							<p class="mt-2">You can put any content here including other components.</p>
+						}
+						@tabs.TabContent("tab2") {
+							<p>This is the content of the second tab.</p>
+							<ul class="mt-2 space-y-1">
+								<li>• List item 1</li>
+								<li>• List item 2</li>
+								<li>• List item 3</li>
+							</ul>
+						}
+						@tabs.TabContent("tab3") {
+							<p>This is the content of the third tab.</p>
+							<div class="mt-2 p-3 bg-blue-50 rounded">
+								<p class="text-sm">This is a notice inside the tab.</p>
+							</div>
+						}
+					}
+				</div>
+
+				<!-- Badges Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Badges</h3>
+					<div class="flex flex-wrap gap-4">
+						@badges.RoundLive("Live")
+						@badges.RoundPending("Pending")
+						@badges.RoundFailed("Failed")
+						@badges.Stale("Stale")
+						@badges.Warning("Warning")
+						@badges.Default("Default")
+						@badges.Positive("Positive")
+						@badges.Neutral("Neutral")
+						@badges.Negative("Negative")
+					</div>
+				</div>
+
+				<!-- Hero Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Hero Section</h3>
+					@components.HeroGrid() {
+						@components.HeroNumber(components.HeroNumberProps{
+							Count: 42,
+							Title: "Active Users",
+							Link: "View All",
+							LinkURL: "/users",
+							HelpText: "Users currently online",
+						})
+						@components.HeroNumber(components.HeroNumberProps{
+							Count: 128,
+							Title: "Projects",
+							Link: "View All",
+							LinkURL: "/projects",
+							HelpText: "Total projects created",
+						})
+						@components.HeroNumber(components.HeroNumberProps{
+							Count: 95,
+							Title: "Success Rate",
+							Link: "View Details",
+							LinkURL: "/metrics",
+							HelpText: "Percentage of successful deployments",
+						})
+					}
+				</div>
+
+				<!-- Section Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Section</h3>
+					@components.Section() {
+						<h4 class="text-lg font-semibold mb-2">Section Content</h4>
+						<p>This is content inside a section component. Sections provide consistent spacing and styling for content areas.</p>
+					}
+				</div>
+
+				<!-- Progress Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Progress Indicators</h3>
+					<div class="grid grid-cols-2 gap-4">
+						<div>
+							<p class="text-sm mb-2">25% Complete</p>
+							@progress.CircularProgress(0.25, progress.StatusRunning, 64, true)
+						</div>
+						<div>
+							<p class="text-sm mb-2">75% Complete</p>
+							@progress.CircularProgress(0.75, progress.StatusRunning, 64, true)
+						</div>
+						<div>
+							<p class="text-sm mb-2">100% Complete</p>
+							@progress.CircularProgress(1.0, progress.StatusComplete, 64, true)
+						</div>
+					</div>
+				</div>
+
+				<!-- Links Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Links</h3>
+					<div class="space-y-2">
+						@links.NewTabLink("External Link", "https://example.com")
+						@links.NewTabLink("Documentation", "https://docs.example.com")
+						@links.NewTabLink("GitHub Repository", "https://github.com/example/repo")
+					</div>
+				</div>
+
+				<!-- Icons Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Icons</h3>
+					<div class="flex flex-wrap gap-4">
+						@icons.Check()
+						@icons.X()
+						@icons.Clock()
+						@icons.Inputs()
+						@icons.Outputs()
+						@icons.Logs()
+						@icons.Links()
+						@icons.Menu()
+						@icons.Dependencies()
+					</div>
+				</div>
+
+			</div>
+		}
+	}
+}

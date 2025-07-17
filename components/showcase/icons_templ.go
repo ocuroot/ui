@@ -31,7 +31,7 @@ func IconsShowcase() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"p-8\"><h2 class=\"text-2xl font-bold mb-6\">Icons</h2><div class=\"space-y-8\"><!-- Status Icons --><div><h3 class=\"text-lg font-semibold mb-4\">Status Icons</h3><div class=\"flex gap-4 items-center\"><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"p-8\"><h2 class=\"text-2xl font-bold mb-6\">Icons</h2><div class=\"space-y-8\"><!-- Status Icons --><div><h3 class=\"text-lg font-semibold mb-4\">Status Icons</h3><div class=\"flex gap-4 items-center\"><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -39,7 +39,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><span class=\"text-sm text-gray-600\">Check</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><span class=\"text-sm text-secondary\">Check</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -47,7 +47,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><span class=\"text-sm text-gray-600\">Clock</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><span class=\"text-sm text-secondary\">Clock</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -55,7 +55,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><span class=\"text-sm text-gray-600\">X</span></div></div></div><!-- Action Icons --><div><h3 class=\"text-lg font-semibold mb-4\">Action Icons</h3><div class=\"flex gap-4 items-center\"><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><span class=\"text-sm text-secondary\">X</span></div></div></div><!-- Action Icons --><div><h3 class=\"text-lg font-semibold mb-4\">Action Icons</h3><div class=\"flex gap-4 items-center\"><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,7 +63,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div><span class=\"text-sm text-gray-600\">Inputs</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div><span class=\"text-sm text-secondary\">Inputs</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -71,7 +71,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div><span class=\"text-sm text-gray-600\">Outputs</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div><span class=\"text-sm text-secondary\">Outputs</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -79,7 +79,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div><span class=\"text-sm text-gray-600\">Logs</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div><span class=\"text-sm text-secondary\">Logs</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -87,7 +87,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div><span class=\"text-sm text-gray-600\">Links</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-white rounded shadow\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div><span class=\"text-sm text-secondary\">Links</span></div><div class=\"flex flex-col items-center gap-2\"><div class=\"p-2 bg-surface rounded shadow\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -95,7 +95,7 @@ func IconsShowcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><span class=\"text-sm text-gray-600\">Dependencies</span></div></div></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><span class=\"text-sm text-secondary\">Dependencies</span></div></div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
