@@ -7,6 +7,7 @@ import (
 	"github.com/ocuroot/ui/components/progress"
 	"github.com/ocuroot/ui/components/links"
 	"github.com/ocuroot/ui/components/icons"
+	"github.com/ocuroot/ui/components/form"
 )
 
 templ ComponentsShowcase() {
@@ -38,7 +39,7 @@ templ ComponentsShowcase() {
 						}
 						@tabs.TabContent("tab3") {
 							<p>This is the content of the third tab.</p>
-							<div class="mt-2 p-3 bg-blue-50 rounded">
+							<div class="mt-2 p-3 bg-secondary rounded">
 								<p class="text-sm">This is a notice inside the tab.</p>
 							</div>
 						}
@@ -141,6 +142,24 @@ templ ComponentsShowcase() {
 						@icons.Menu()
 						@icons.Dependencies()
 					</div>
+				</div>
+
+				<!-- Form Component -->
+				<div class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Form</h3>
+					@form.Form(form.FormProps{
+						Title: "Contact Form",
+						Method: "POST",
+						Submit: form.SubmitProps{
+							Title: "Send Message",
+							CancelText: "Cancel",
+							CancelPath: "/",
+						},
+					}) {
+						@form.TextField("Name", "name", "")
+						@form.TextField("Email", "email", "")
+						@form.TextField("Message", "message", "")
+					}
 				</div>
 
 			</div>

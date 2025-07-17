@@ -1,7 +1,33 @@
 package buttons
 
-templ Button(text string) {
-    <div class="button">
-        {text}
-    </div>
+type ButtonProps struct {
+    Type      string // "button", "submit", "reset"
+    OnClick   templ.ComponentScript
+    Disabled  bool
+}
+
+func getButtonType(props ButtonProps) string {
+    if props.Type != "" {
+        return props.Type
+    }
+    return "button"
+}
+
+templ Button() {
+    <button type="button" class="button">
+        { children... }
+    </button>
+}
+
+templ ButtonWithProps(props ButtonProps) {
+    <button 
+        type={ getButtonType(props) }
+        class="button"
+        onclick={ props.OnClick }
+        if props.Disabled {
+            disabled
+        }
+    >
+        { children... }
+    </button>
 }

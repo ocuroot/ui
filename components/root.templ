@@ -265,9 +265,6 @@ templ Footer(packageName, version string) {
 	</footer>
 }
 
-templ Button(text string) {
-	<button type="button" class="text-white bg-primary focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-4 py-2 text-center">{ text }</button>
-}
 
 templ ButtonLink(text string, url string) {
 	<a href={ templ.URL(url) } class="text-white bg-primary focus:ring-4 focus:outline-none font-semibold rounded-lg text-sm px-4 py-2 text-center">{ text }</a>

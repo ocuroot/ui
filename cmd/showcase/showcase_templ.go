@@ -69,7 +69,7 @@ func Showcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\">UI Showcase</h1><p>This is a showcase of the UI components.</p><div class=\"p-4 bg-surface border rounded-lg mb-4\"><h2 class=\"text-xl font-semibold mb-2\">Component Showcases</h2><div class=\"space-x-4\"><a href=\"/modal\" class=\"bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600\">Modal Components</a> <a href=\"/table\" class=\"bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600\">Table Components</a> <a href=\"/components\" class=\"bg-primarycolor text-white px-4 py-2 rounded hover:bg-blue-600\">All Components</a></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\">UI Showcase</h1><p>This is a showcase of the UI components.</p><div class=\"p-4 bg-surface border rounded-lg mb-4\"><h2 class=\"text-xl font-semibold mb-2\">Component Showcases</h2><div class=\"space-x-4\"><a href=\"/modal\" class=\"bg-primary text-white px-4 py-2 rounded hover:bg-secondary\">Modal Components</a> <a href=\"/table\" class=\"bg-primary text-white px-4 py-2 rounded hover:bg-secondary\">Table Components</a> <a href=\"/components\" class=\"bg-primary text-white px-4 py-2 rounded hover:bg-secondary\">All Components</a></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -321,11 +321,29 @@ func Showcase() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = buttons.Button("Button").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var14 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "Button ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = buttons.Button().Render(templ.WithChildren(ctx, templ_7745c5c3_Var14), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "</body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

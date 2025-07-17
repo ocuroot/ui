@@ -57,7 +57,7 @@ func Actions(id string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"inline-flex items-center p-2 text-sm font-medium text-center border border-gray-300 text-gray-900 rounded-lg bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-50\" type=\"button\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"inline-flex items-center p-2 text-sm font-medium text-center border rounded-lg bg-surface hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-4 text-primary transition-colors duration-200\" type=\"button\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -78,7 +78,7 @@ func Actions(id string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" class=\"z-10 hidden text-left border border-gray-300 bg-white divide-y divide-gray-100 rounded-lg shadow w-44\"><ul class=\"text-sm text-gray-700\" aria-labelledby=\"dropdownMenuIconHorizontalButton\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" class=\"z-10 hidden text-left border bg-surface divide-y rounded-lg shadow w-44\"><ul class=\"text-sm text-primary py-1\" aria-labelledby=\"dropdownMenuIconHorizontalButton\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -96,11 +96,26 @@ func Actions(id string) templ.Component {
 
 func showHideDropdown(event templ.JSExpression, id string) templ.ComponentScript {
 	return templ.ComponentScript{
-		Name: `__templ_showHideDropdown_2c95`,
-		Function: `function __templ_showHideDropdown_2c95(event, id){event.stopPropagation();
+		Name: `__templ_showHideDropdown_7154`,
+		Function: `function __templ_showHideDropdown_7154(event, id){event.stopPropagation();
+	const dropdown = document.getElementById(id);
+	if (dropdown) {
+		dropdown.classList.toggle('hidden');
+		
+		// Close dropdown when clicking outside
+		if (!dropdown.classList.contains('hidden')) {
+			const closeDropdown = (e) => {
+				if (!dropdown.contains(e.target) && !e.target.closest('[data-dropdown-toggle="' + id + '"]')) {
+					dropdown.classList.add('hidden');
+					document.removeEventListener('click', closeDropdown);
+				}
+			};
+			setTimeout(() => document.addEventListener('click', closeDropdown), 0);
+		}
+	}
 }`,
-		Call:       templ.SafeScript(`__templ_showHideDropdown_2c95`, event, id),
-		CallInline: templ.SafeScriptInline(`__templ_showHideDropdown_2c95`, event, id),
+		Call:       templ.SafeScript(`__templ_showHideDropdown_7154`, event, id),
+		CallInline: templ.SafeScriptInline(`__templ_showHideDropdown_7154`, event, id),
 	}
 }
 
@@ -134,14 +149,14 @@ func ActionLink(label, url string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" class=\"w-full text-left block px-4 py-2 hover:bg-gray-100\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" class=\"w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-black/20 transition-colors duration-200 text-primary cursor-pointer rounded-md mx-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/actiondropdown/actions.templ`, Line: 30, Col: 10}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/actiondropdown/actions.templ`, Line: 45, Col: 10}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -176,7 +191,7 @@ func ActionItem() templ.Component {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<li>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<li class=\"hover:bg-gray-100 dark:hover:bg-black/20 transition-colors duration-200 cursor-pointer rounded-md mx-2\"><div class=\"px-4 py-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -184,7 +199,7 @@ func ActionItem() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</li>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</div></li>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

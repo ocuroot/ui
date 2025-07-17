@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/ocuroot/ui/components"
+	"github.com/ocuroot/ui/components/buttons"
 	"github.com/ocuroot/ui/components/table"
+	"github.com/ocuroot/ui/components/actiondropdown"
 )
 
 templ TableShowcase() {
@@ -60,7 +62,7 @@ templ TableShowcase() {
 								Complete
 							}
 							@table.Td(table.TDProps{RightAlign: true}) {
-								<button class="text-blue-600 hover:text-blue-800">View</button>
+								@buttons.Button() { View }
 							}
 						}
 						@table.Tr(table.TRProps{Link: templ.SafeURL("/project/2")}) {
@@ -71,7 +73,7 @@ templ TableShowcase() {
 								In Progress
 							}
 							@table.Td(table.TDProps{RightAlign: true}) {
-								<button class="text-blue-600 hover:text-blue-800">View</button>
+								@buttons.Button() { View }
 							}
 						}
 						@table.Tr(table.TRProps{Link: templ.SafeURL("/project/3")}) {
@@ -82,7 +84,7 @@ templ TableShowcase() {
 								Pending
 							}
 							@table.Td(table.TDProps{RightAlign: true}) {
-								<button class="text-blue-600 hover:text-blue-800">View</button>
+								@buttons.Button() { View }
 							}
 						}
 					}
@@ -102,9 +104,9 @@ templ TableShowcase() {
 								2.1 MB
 							}
 							@table.TdActions("file-1") {
-								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Download</button>
-								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Rename</button>
-								<button class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Delete</button>
+								@actiondropdown.ActionLink("Download", "#")
+								@actiondropdown.ActionLink("Rename", "#")
+								@actiondropdown.ActionLink("Delete", "#")
 							}
 						}
 						@table.Tr(table.TRProps{}) {
@@ -118,9 +120,9 @@ templ TableShowcase() {
 								856 KB
 							}
 							@table.TdActions("file-2") {
-								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Download</button>
-								<button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Rename</button>
-								<button class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Delete</button>
+								@actiondropdown.ActionLink("Download", "#")
+								@actiondropdown.ActionLink("Rename", "#")
+								@actiondropdown.ActionLink("Delete", "#")
 							}
 						}
 					}

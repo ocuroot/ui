@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/ocuroot/ui/components"
+	"github.com/ocuroot/ui/components/buttons"
 	"github.com/ocuroot/ui/components/table"
 )
 
@@ -12,9 +13,9 @@ templ ModalShowcase() {
 			<div class="space-y-4">
 				<div class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-2">Small Modal</h3>
-					<button onclick={ components.OpenModal("small-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
-						Open Small Modal
-					</button>
+					<div onclick={ components.OpenModal("small-modal") }>
+						@buttons.Button() { Open Small Modal }
+					</div>
 					@components.Modal("small-modal", "Small Modal", "sm") {
 						<p>This is a small modal example with basic content.</p>
 						<p>It demonstrates the smallest modal size available.</p>
@@ -23,13 +24,13 @@ templ ModalShowcase() {
 
 				<div class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-2">Medium Modal</h3>
-					<button onclick={ components.OpenModal("medium-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
-						Open Medium Modal
-					</button>
+					<div onclick={ components.OpenModal("medium-modal") }>
+						@buttons.Button() { Open Medium Modal }
+					</div>
 					@components.Modal("medium-modal", "Medium Modal", "md") {
 						<p>This is a medium-sized modal with more content space.</p>
 						<p>Perfect for forms or detailed information.</p>
-						<div class="mt-4 p-3 bg-blue-50 rounded">
+						<div class="mt-4 p-3 bg-secondary rounded">
 							<p class="text-sm">This is an info box inside the modal.</p>
 						</div>
 					}
@@ -37,9 +38,9 @@ templ ModalShowcase() {
 
 				<div class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-2">Large Modal (Default)</h3>
-					<button onclick={ components.OpenModal("large-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
-						Open Large Modal
-					</button>
+					<div onclick={ components.OpenModal("large-modal") }>
+						@buttons.Button() { Open Large Modal }
+					</div>
 					@components.Modal("large-modal", "Large Modal") {
 						<p>This is a large modal, which is the default size.</p>
 						<p>It provides plenty of space for complex content.</p>
@@ -58,9 +59,9 @@ templ ModalShowcase() {
 
 				<div class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-2">Extra Large Modal</h3>
-					<button onclick={ components.OpenModal("xl-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
-						Open XL Modal
-					</button>
+					<div onclick={ components.OpenModal("xl-modal") }>
+						@buttons.Button() { Open XL Modal }
+					</div>
 					@components.Modal("xl-modal", "Extra Large Modal", "xl") {
 						<p>This is an extra large modal for extensive content.</p>
 						<div class="mt-4">
@@ -81,9 +82,9 @@ templ ModalShowcase() {
 
 				<div class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-2">Modal with Table</h3>
-					<button onclick={ components.OpenModal("table-modal") } class="bg-primarycolor text-white px-4 py-2 rounded">
-						Open Table Modal
-					</button>
+					<div onclick={ components.OpenModal("table-modal") }>
+						@buttons.Button() { Open Table Modal }
+					</div>
 					@components.Modal("table-modal", "Data Table", "xl") {
 						<p class="mb-4">This modal contains a data table demonstrating how tables work within modals.</p>
 						@table.Table(table.TableProps{Columns: []string{"Name", "Status", "Actions"}}, "Name", "Status", "Actions") {
@@ -95,7 +96,7 @@ templ ModalShowcase() {
 									Complete
 								}
 								@table.Td(table.TDProps{RightAlign: true}) {
-									<button class="text-blue-600 hover:text-blue-800">View</button>
+									@buttons.Button() { View }
 								}
 							}
 							@table.Tr(table.TRProps{}) {
@@ -106,7 +107,7 @@ templ ModalShowcase() {
 									Running
 								}
 								@table.Td(table.TDProps{RightAlign: true}) {
-									<button class="text-blue-600 hover:text-blue-800">View</button>
+									@buttons.Button() { View }
 								}
 							}
 							@table.Tr(table.TRProps{}) {
@@ -117,7 +118,7 @@ templ ModalShowcase() {
 									Failed
 								}
 								@table.Td(table.TDProps{RightAlign: true}) {
-									<button class="text-blue-600 hover:text-blue-800">View</button>
+									@buttons.Button() { View }
 								}
 							}
 						}

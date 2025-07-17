@@ -1,6 +1,9 @@
 package form
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/ocuroot/ui/components/buttons"
+)
 
 type FormProps struct {
 	Title  string
@@ -35,16 +38,15 @@ templ Submit(props SubmitProps) {
 				{ props.CancelText }
 			}
 		</a>
-		<button
-			type="submit"
-			class="flex items-center justify-center rounded-lg bg-secondarycolor px-5 py-2.5 text-sm font-medium text-white hover:bg-secondarycolor/90 focus:outline-none focus:ring-4  focus:ring-secondarycolor/50"
-		>
+		@buttons.ButtonWithProps(buttons.ButtonProps{
+			Type: "submit",
+		}) {
 			if props.Title == "" {
 				Save
 			} else {
 				{ props.Title }
 			}
-		</button>
+		}
 	</div>
 }
 

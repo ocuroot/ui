@@ -91,7 +91,7 @@ func Pairs(in []Pair) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			if pair.Link != "" {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<a class=\"text-blue-500 hover:text-blue-700 hover:underline\" href=\"")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<a class=\"text-primary hover:text-secondary hover:underline\" href=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
