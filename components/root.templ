@@ -33,7 +33,7 @@ templ RootSimple(c echo.Context, title string, scripts ...templ.Component) {
 
 templ RootNoContainer(c echo.Context, scripts ...templ.Component) {
 	@Body() {
-		@Navbar(c)
+		@Navbar()
 		{ children... }
 		@Footer("Ocuroot", "dev")
 		@Scripts(c, scripts...)
@@ -103,12 +103,7 @@ templ Nav(classes ...string) {
 	</nav>
 }
 
-func hasIdentity(c echo.Context) bool {
-	// TODO: Implement this with orgs
-	return false
-}
-
-templ Navbar(c echo.Context) {
+templ Navbar() {
 	@Nav("max-w-screen-xl") {
 		@NavMenu("navbar-user", true) {
 			@MenuItem("Environments", "/environments", false)
