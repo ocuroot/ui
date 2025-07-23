@@ -150,6 +150,34 @@ p {
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    
+    /* Section Components - Dark Mode */
+    --hero-bg-start: #1e293b;
+    --hero-bg-end: #334155;
+    --hero-overlay-start: rgba(30, 41, 59, 0.85);
+    --hero-overlay-end: rgba(30, 41, 59, 0.9);
+    
+    /* Links - Dark Mode */
+    --link-color: #60a5fa;
+    --link-bg: #1e3a8a;
+    --link-border: #3b82f6;
+    --link-bg-hover: #1d4ed8;
+    
+    /* Buttons - Dark Mode */
+    --btn-primary-text: #ffffff;
+    --btn-primary-bg: #3b82f6;
+    --btn-primary-bg-hover: #2563eb;
+    --btn-primary-focus: #60a5fa;
+    
+    /* Feature Icons - Dark Mode */
+    --icon-green-bg: #064e3b;
+    --icon-green-color: #34d399;
+    --icon-blue-bg: #1e3a8a;
+    --icon-blue-color: #60a5fa;
+    --icon-purple-bg: #581c87;
+    --icon-purple-color: #a855f7;
+    --icon-yellow-bg: #92400e;
+    --icon-yellow-color: #fbbf24;
 }
 
 body {

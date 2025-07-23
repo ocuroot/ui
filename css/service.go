@@ -17,6 +17,9 @@ var mainCSS string
 //go:embed navbar.css
 var navbarCSS string
 
+//go:embed section.css
+var sectionCSS string
+
 // Service provides unified CSS serving functionality
 type Service struct {
 	combinedCSS string
@@ -36,7 +39,7 @@ func NewService() *Service {
 	}
 }
 
-// combineCSS concatenates the main CSS and navbar CSS with proper separators
+// combineCSS concatenates the main CSS, navbar CSS, and section CSS with proper separators
 func combineCSS() string {
 	var builder strings.Builder
 	
@@ -50,6 +53,14 @@ func combineCSS() string {
 	
 	// Add navbar CSS
 	builder.WriteString(navbarCSS)
+	
+	// Add separator
+	builder.WriteString("\n\n/* =========================================\n")
+	builder.WriteString(" * SECTION CSS - Combined from section.css\n")
+	builder.WriteString(" * ========================================= */\n\n")
+	
+	// Add section CSS
+	builder.WriteString(sectionCSS)
 	
 	return builder.String()
 }
@@ -95,4 +106,9 @@ func (s *Service) GetMainCSSSize() int {
 // GetNavbarCSSSize returns the size of the navbar CSS in bytes
 func (s *Service) GetNavbarCSSSize() int {
 	return len(navbarCSS)
+}
+
+// GetSectionCSSSize returns the size of the section CSS in bytes
+func (s *Service) GetSectionCSSSize() int {
+	return len(sectionCSS)
 }

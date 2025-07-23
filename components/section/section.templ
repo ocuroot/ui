@@ -1,0 +1,105 @@
+package section
+
+// HeroSection creates a hero section with title, subtitle, and optional CTA
+templ HeroSection(title, subtitle, ctaText, ctaURL string) {
+	<section class="hero-section">
+		<div class="hero-background">
+			<div class="hero-overlay"></div>
+		</div>
+		
+		<div class="hero-content">
+			<div class="hero-text">
+				<h1 class="hero-title">{ title }</h1>
+				<p class="hero-subtitle">{ subtitle }</p>
+				if ctaText != "" && ctaURL != "" {
+					<div class="hero-cta">
+						<a href={ templ.URL(ctaURL) } class="btn btn-primary">
+							{ ctaText }
+							<svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+							</svg>
+						</a>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// ContentSection creates a standard content section with title and content
+templ ContentSection(title string) {
+	<section class="content-section">
+		<div class="content-container">
+			if title != "" {
+				<h2 class="section-title">{ title }</h2>
+			}
+			<div class="section-content">
+				{ children... }
+			</div>
+		</div>
+	</section>
+}
+
+// ContentSectionWithImage creates a content section with an optional image on left or right
+templ ContentSectionWithImage(title, imageURL, imageAlt, imageSide string) {
+	<section class="content-section">
+		<div class="content-container">
+			if title != "" {
+				<h2 class="section-title">{ title }</h2>
+			}
+			<div class={ templ.Classes("section-content-with-image", templ.KV("image-left", imageSide == "left"), templ.KV("image-right", imageSide == "right" || imageSide == "")) }>
+				if imageSide == "left" && imageURL != "" {
+					<div class="section-image">
+						<img src={ imageURL } alt={ imageAlt } class="content-image"/>
+					</div>
+				}
+				<div class="section-text-content">
+					{ children... }
+				</div>
+				if (imageSide == "right" || imageSide == "") && imageURL != "" {
+					<div class="section-image">
+						<img src={ imageURL } alt={ imageAlt } class="content-image"/>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+}
+
+// FeatureGrid creates a grid of feature cards
+templ FeatureGrid(title string) {
+	<section class="features-section">
+		<div class="content-container">
+			if title != "" {
+				<h2 class="section-title">{ title }</h2>
+			}
+			<div class="features-grid">
+				{ children... }
+			</div>
+		</div>
+	</section>
+}
+
+// FeatureCard creates a single feature card
+templ FeatureCard(icon, title, description, linkText, linkURL string) {
+	<div class="feature-card">
+		<div class={ "feature-icon " + icon }>
+			{ children... }
+		</div>
+		<h3 class="feature-title">{ title }</h3>
+		<p class="feature-description">{ description }</p>
+		if linkText != "" && linkURL != "" {
+			<a href={ templ.URL(linkURL) } class="feature-link">
+				{ linkText }
+				<svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+				</svg>
+			</a>
+		}
+	</div>
+}
+
+// SectionDivider creates a horizontal rule divider
+templ SectionDivider() {
+	<hr class="section-divider"/>
+}

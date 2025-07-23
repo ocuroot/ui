@@ -2,12 +2,13 @@ package main
 
 import (
 	"github.com/ocuroot/ui/components"
-	"github.com/ocuroot/ui/components/tabs"
 	"github.com/ocuroot/ui/components/badges"
-	"github.com/ocuroot/ui/components/progress"
-	"github.com/ocuroot/ui/components/links"
-	"github.com/ocuroot/ui/components/icons"
 	"github.com/ocuroot/ui/components/form"
+	"github.com/ocuroot/ui/components/icons"
+	"github.com/ocuroot/ui/components/links"
+	"github.com/ocuroot/ui/components/progress"
+	"github.com/ocuroot/ui/components/section"
+	"github.com/ocuroot/ui/components/tabs"
 )
 
 templ ComponentsShowcase() {
@@ -15,7 +16,6 @@ templ ComponentsShowcase() {
 		@components.Section() {
 			<h2 class="text-2xl font-semibold mb-4">All Components</h2>
 			<div class="space-y-8">
-				
 				<!-- Tabs Component -->
 				<div id="tabs" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Tabs</h3>
@@ -45,7 +45,6 @@ templ ComponentsShowcase() {
 						}
 					}
 				</div>
-
 				<!-- Badges Component -->
 				<div id="badges" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Badges</h3>
@@ -61,35 +60,33 @@ templ ComponentsShowcase() {
 						@badges.Negative("Negative")
 					</div>
 				</div>
-
 				<!-- Hero Component -->
 				<div id="hero" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Hero Section</h3>
 					@components.HeroGrid() {
 						@components.HeroNumber(components.HeroNumberProps{
-							Count: 42,
-							Title: "Active Users",
-							Link: "View All",
-							LinkURL: "/users",
+							Count:    42,
+							Title:    "Active Users",
+							Link:     "View All",
+							LinkURL:  "/users",
 							HelpText: "Users currently online",
 						})
 						@components.HeroNumber(components.HeroNumberProps{
-							Count: 128,
-							Title: "Projects",
-							Link: "View All",
-							LinkURL: "/projects",
+							Count:    128,
+							Title:    "Projects",
+							Link:     "View All",
+							LinkURL:  "/projects",
 							HelpText: "Total projects created",
 						})
 						@components.HeroNumber(components.HeroNumberProps{
-							Count: 95,
-							Title: "Success Rate",
-							Link: "View Details",
-							LinkURL: "/metrics",
+							Count:    95,
+							Title:    "Success Rate",
+							Link:     "View Details",
+							LinkURL:  "/metrics",
 							HelpText: "Percentage of successful deployments",
 						})
 					}
 				</div>
-
 				<!-- Section Component -->
 				<div class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Section</h3>
@@ -98,7 +95,101 @@ templ ComponentsShowcase() {
 						<p>This is content inside a section component. Sections provide consistent spacing and styling for content areas.</p>
 					}
 				</div>
-
+				<!-- New Section Components -->
+				<div id="section-components" class="p-4 bg-surface border rounded-lg">
+					<h3 class="text-lg font-semibold mb-4">Section Components</h3>
+					<div class="space-y-8">
+						<!-- Hero Section Example -->
+						<div>
+							<h4 class="text-md font-semibold mb-2">Hero Section</h4>
+							@section.HeroSection(
+								"Welcome to Ocuroot",
+								"The modern CI/CD platform that helps your team ship faster with confidence. Built for developers, by developers.",
+								"Get Started",
+								"/demo",
+							)
+						</div>
+						<!-- Content Section with Image (Right) Example -->
+						<div>
+							<h4 class="text-md font-semibold mb-2">Content Section with Image (Right)</h4>
+							<div style="display: flex; flex-direction: row-reverse; gap: 0; align-items: flex-start;">
+								<div style="flex: 0 0 50%; padding: 1rem;">
+									<img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Team collaborating on code" style="width: 100%; height: auto; max-height: 300px; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); object-fit: cover;"/>
+								</div>
+								<div style="flex: 0 0 50%; padding: 1rem;">
+									<p class="mb-4" style="color: var(--text-secondary);">
+										Streamline your development process with our integrated tools and workflows. From code to deployment, everything works seamlessly together.
+									</p>
+									<p class="mb-4" style="color: var(--text-secondary);">
+										Collaborate effectively with your team using built-in code review, automated testing, and continuous integration features.
+									</p>
+									<a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+										Learn more about our workflow
+										<svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!-- Content Section with Image (Left) Example -->
+						<div>
+							<h4 class="text-md font-semibold mb-2">Content Section with Image (Left)</h4>
+							<div style="display: flex; flex-direction: row; gap: 0; align-items: flex-start;">
+								<div style="flex: 0 0 50%; padding: 1rem;">
+									<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Analytics dashboard" style="width: 100%; height: auto; max-height: 300px; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); object-fit: cover;"/>
+								</div>
+								<div style="flex: 0 0 50%; padding: 1rem;">
+									<p class="mb-4" style="color: var(--text-secondary);">
+										Gain deep insights into your deployment pipeline with comprehensive analytics and monitoring. Track performance metrics, identify bottlenecks, and optimize your workflow.
+									</p>
+									<p class="mb-4" style="color: var(--text-secondary);">
+										Real-time dashboards provide visibility into every aspect of your CI/CD process, helping you make data-driven decisions to improve your development velocity.
+									</p>
+									<a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+										Explore analytics features
+										<svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!-- Feature Grid Example -->
+						<div>
+							<h4 class="text-md font-semibold mb-2">Feature Grid</h4>
+							@section.FeatureGrid("Key Features") {
+								@section.FeatureCard("icon-green", "Fast Deployments", "Deploy your applications in seconds with our optimized pipeline engine.", "Learn More", "/features/speed") {
+									<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+									</svg>
+								}
+								@section.FeatureCard("icon-blue", "Secure by Default", "Built-in security scanning and compliance checks for every deployment.", "Learn More", "/features/security") {
+									<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+									</svg>
+								}
+								@section.FeatureCard("icon-purple", "Scalable Infrastructure", "Automatically scale your deployments based on demand and traffic patterns.", "Learn More", "/features/scaling") {
+									<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+									</svg>
+								}
+								@section.FeatureCard("icon-yellow", "Cost Optimized", "Smart resource management to minimize your cloud infrastructure costs.", "Learn More", "/features/cost") {
+									<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+									</svg>
+								}
+							}
+						</div>
+						<!-- Section Divider Example -->
+						<div>
+							<h4 class="text-md font-semibold mb-2">Section Divider</h4>
+							<p class="mb-4 text-sm text-gray-600">Use section dividers to separate content sections:</p>
+							@section.SectionDivider()
+							<p class="mt-4 text-sm text-gray-600">Content after the divider</p>
+						</div>
+					</div>
+				</div>
 				<!-- Progress Component -->
 				<div id="progress" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Progress Indicators</h3>
@@ -117,7 +208,6 @@ templ ComponentsShowcase() {
 						</div>
 					</div>
 				</div>
-
 				<!-- Links Component -->
 				<div id="links" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Links</h3>
@@ -127,7 +217,6 @@ templ ComponentsShowcase() {
 						@links.NewTabLink("GitHub Repository", "https://github.com/example/repo")
 					</div>
 				</div>
-
 				<!-- Icons Component -->
 				<div id="icons" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Icons</h3>
@@ -143,15 +232,14 @@ templ ComponentsShowcase() {
 						@icons.Dependencies()
 					</div>
 				</div>
-
 				<!-- Form Component -->
 				<div id="forms" class="p-4 bg-surface border rounded-lg">
 					<h3 class="text-lg font-semibold mb-4">Form</h3>
 					@form.Form(form.FormProps{
-						Title: "Contact Form",
+						Title:  "Contact Form",
 						Method: "POST",
 						Submit: form.SubmitProps{
-							Title: "Send Message",
+							Title:      "Send Message",
 							CancelText: "Cancel",
 							CancelPath: "/",
 						},
@@ -161,7 +249,6 @@ templ ComponentsShowcase() {
 						@form.TextField("Message", "message", "")
 					}
 				</div>
-
 			</div>
 		}
 	}
