@@ -3,6 +3,7 @@ package main
 import (
     "github.com/ocuroot/ui/components"
     "github.com/ocuroot/ui/css"
+    "github.com/ocuroot/ui/js"
 )
 
 // ShowcaseLayout creates a consistent layout for all showcase pages
@@ -23,7 +24,7 @@ templ ShowcaseLayout(activePage, title, description string) {
                 <p class="mb-6 text-secondary">{ description }</p>
                 { children... }
             }
-            <script src="/components/navbar/navbar.js"></script>
+            @js.UnifiedJSScript()
         </body>
     </html>
 }

@@ -1,0 +1,19 @@
+package js
+
+// UnifiedJS renders the combined JavaScript inline
+templ UnifiedJS() {
+	<script>
+		@NewService()
+	</script>
+}
+
+// UnifiedJSLink renders a link to the unified JavaScript endpoint
+templ UnifiedJSLink() {
+	<script src="/script.js"></script>
+}
+
+// UnifiedJSScript renders a script tag linking to the unified JavaScript endpoint
+// This is an alias for UnifiedJSLink for consistency with CSS naming
+templ UnifiedJSScript() {
+	<script src="/script.js"></script>
+}
