@@ -772,7 +772,7 @@ func ModalShowcase() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = components.RootSimple(nil, "Modal Showcase").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ShowcaseLayout("modal", "Modal Showcase", "This is a showcase of the modal components.").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

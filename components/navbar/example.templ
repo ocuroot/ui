@@ -1,0 +1,57 @@
+package navbar
+
+// Example usage of the flexible navbar component
+templ ExamplePage() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>Navbar Example</title>
+			<link rel="stylesheet" href="/components/navbar/navbar.css"/>
+		</head>
+		<body>
+			@Navbar(NavbarConfig{
+				BrandName: "Ocuroot",
+				BrandURL:  "/",
+				LogoURL:   "/static/logo.svg",
+				Items: []NavItem{
+					NavLink{Name: "Environments", URL: "/environments", Active: false},
+					NavLink{Name: "Repositories", URL: "/repositories", Active: true}, // Current page
+					NavDropdown{
+						ID:   "releases",
+						Name: "Releases",
+						Items: []DropdownItem{
+							{Name: "Releases", URL: "/releases"},
+							{Name: "Phases", URL: "/phases"},
+							{Name: "Function Chains", URL: "/functionchains"},
+							{Name: "Functions", URL: "/functions"},
+						},
+					},
+					NavLink{Name: "Commits", URL: "/commits", Active: false},
+					NavLink{Name: "Packages", URL: "/packages", Active: false},
+					NavDropdown{
+						ID:   "organization",
+						Name: "Organization",
+						Items: []DropdownItem{
+							{Name: "Users", URL: "/users"},
+							{Name: "Service Accounts", URL: "/service_accounts"},
+							{Name: "Secrets", URL: "/secrets"},
+						},
+					},
+				},
+				ShowThemeToggle: true,
+				ShowUserMenu:    true,
+				UserAvatarURL:   "/static/anon_user.svg",
+			})
+			
+			<main style="padding: 2rem;">
+				<h1>Welcome to the Navbar Example</h1>
+				<p>This demonstrates the flexible navbar component with configurable links and dropdowns.</p>
+				<p>Try resizing your browser window to see the responsive behavior!</p>
+			</main>
+			
+			<script src="/components/navbar/navbar.js"></script>
+		</body>
+	</html>
+}

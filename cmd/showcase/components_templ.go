@@ -63,7 +63,7 @@ func ComponentsShowcase() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"text-2xl font-semibold mb-4\">All Components</h2><div class=\"space-y-8\"><!-- Tabs Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Tabs</h3>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h2 class=\"text-2xl font-semibold mb-4\">All Components</h2><div class=\"space-y-8\"><!-- Tabs Component --><div id=\"tabs\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Tabs</h3>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -197,7 +197,7 @@ func ComponentsShowcase() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><!-- Badges Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Badges</h3><div class=\"flex flex-wrap gap-4\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><!-- Badges Component --><div id=\"badges\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Badges</h3><div class=\"flex flex-wrap gap-4\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -237,7 +237,7 @@ func ComponentsShowcase() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</div></div><!-- Hero Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Hero Section</h3>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</div></div><!-- Hero Component --><div id=\"hero\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Hero Section</h3>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -323,7 +323,7 @@ func ComponentsShowcase() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "</div><!-- Progress Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Progress Indicators</h3><div class=\"grid grid-cols-2 gap-4\"><div><p class=\"text-sm mb-2\">25% Complete</p>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "</div><!-- Progress Component --><div id=\"progress\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Progress Indicators</h3><div class=\"grid grid-cols-2 gap-4\"><div><p class=\"text-sm mb-2\">25% Complete</p>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -347,7 +347,7 @@ func ComponentsShowcase() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</div></div></div><!-- Links Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Links</h3><div class=\"space-y-2\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</div></div></div><!-- Links Component --><div id=\"links\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Links</h3><div class=\"space-y-2\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -363,7 +363,7 @@ func ComponentsShowcase() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</div></div><!-- Icons Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Icons</h3><div class=\"flex flex-wrap gap-4\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</div></div><!-- Icons Component --><div id=\"icons\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Icons</h3><div class=\"flex flex-wrap gap-4\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -403,7 +403,7 @@ func ComponentsShowcase() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</div></div><!-- Form Component --><div class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Form</h3>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</div></div><!-- Form Component --><div id=\"forms\" class=\"p-4 bg-surface border rounded-lg\"><h3 class=\"text-lg font-semibold mb-4\">Form</h3>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -465,7 +465,7 @@ func ComponentsShowcase() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = components.RootSimple(nil, "Components Showcase").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ShowcaseLayout("components", "Components Showcase", "This is a showcase of all the UI components.").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -1,0 +1,13 @@
+package css
+
+// UnifiedCSS renders the combined CSS as an inline style tag
+templ UnifiedCSS() {
+	<style>
+		@templ.Raw(NewService().GetCombinedCSS())
+	</style>
+}
+
+// UnifiedCSSLink renders a link tag to the unified CSS endpoint
+templ UnifiedCSSLink() {
+	<link href="/style.css" rel="stylesheet"/>
+}

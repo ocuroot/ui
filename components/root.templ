@@ -1,10 +1,8 @@
 package components
 
 import (
-	"fmt"
 	"github.com/labstack/echo/v4"
-
-	"strings"
+	"github.com/ocuroot/ui/css"
 )
 
 templ Root(c echo.Context, scripts ...templ.Component) {
@@ -17,12 +15,12 @@ templ Root(c echo.Context, scripts ...templ.Component) {
 
 templ RootSimple(c echo.Context, title string, scripts ...templ.Component) {
 	@Body() {
-		@Nav("max-w-screen-xl") {
-			<div class="flex items-center md:order-2">
+		<header class="bg-navbar w-full border-b">
+			<div class="flex items-center justify-between mx-auto p-4 max-w-screen-xl">
 				<h1 class="text-xl font-semibold text-navbar">{ title }</h1>
+				@ThemeToggle()
 			</div>
-			@ThemeToggle()
-		}
+		</header>
 		@Container() {
 			{ children... }
 		}
@@ -33,7 +31,6 @@ templ RootSimple(c echo.Context, title string, scripts ...templ.Component) {
 
 templ RootNoContainer(c echo.Context, scripts ...templ.Component) {
 	@Body() {
-		@Navbar()
 		{ children... }
 		@Footer("Ocuroot", "dev")
 		@Scripts(c, scripts...)
@@ -52,7 +49,7 @@ templ Body() {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<link href="/style.css" rel="stylesheet"/>
+			@css.UnifiedCSSLink()
 			<title>Ocuroot</title>
 			<style>
 				[role="tab"][aria-selected="true"] {
@@ -83,156 +80,6 @@ templ Scripts(c echo.Context, scripts ...templ.Component) {
 	for _, script := range scripts {
 		@script
 	}
-}
-
-templ Logo() {
-	<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-		<img src="/static/logo.svg" class="h-10" alt="Ocuroot Logo"/>
-		<span class="hidden sm:self-center sm:text-2xl sm:font-semibold sm:whitespace-nowrap text-navbar md:block">Ocuroot</span>
-	</a>
-}
-
-templ Nav(classes ...string) {
-	<nav class="bg-navbar w-full border-b">
-		<div class={ fmt.Sprintf("flex flex-wrap items-center justify-between mx-auto p-4 %s", strings.Join(classes, " ")) }>
-			@Logo()
-			<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-				{ children... }
-			</div>
-		</div>
-	</nav>
-}
-
-templ Navbar() {
-	@Nav("max-w-screen-xl") {
-		@NavMenu("navbar-user", true) {
-			@MenuItem("Environments", "/environments", false)
-			@MenuItem("Repositories", "/repositories", false)
-			@MenuItem("Commits", "/commits", false)
-			@MenuItem("Packages", "/packages", false)
-			@DropdownMenu("releases", "Releases") {
-				@DropdownMenuItem("Releases", "/releases")
-				@DropdownMenuItem("Phases", "/phases")
-				@DropdownMenuItem("Function Chains", "/functionchains")
-				@DropdownMenuItem("Functions", "/functions")
-			}
-			@DropdownMenu("organization", "Organization") {
-				@DropdownMenuItem("Users", "/users")
-				@DropdownMenuItem("Service Accounts", "/service_accounts")
-				@DropdownMenuItem("Secrets", "/secrets")
-			}
-		}
-		@ThemeToggle()
-		@UserDropdownNone()
-		@NavMenuExpandButton("navbar-user")
-	}
-}
-
-templ NavMenu(id string, spacer bool) {
-	<div class="justify-between hidden w-full md:flex md:w-auto" id={ id }>
-		<ul class="text-navbar flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-			{ children... }
-			if spacer {
-				<!-- Spacer for user icon, probably a better way to do this -->
-				<div class="mx-5 hidden md:block">
-					&nbsp;
-				</div>
-			}
-		</ul>
-	</div>
-}
-
-templ NavMenuExpandButton(menuId string) {
-	<button data-collapse-toggle={ menuId } type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-secondary rounded-lg md:hidden hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false">
-		<span class="sr-only">Open main menu</span>
-		<svg class="w-5 h-5 text-secondary" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path>
-		</svg>
-	</button>
-}
-
-templ UserDropdownNone() {
-	@UserDropdownImpl("/static/anon_user.svg") {
-		@UserDropdownSection() {
-			<span class="block text-sm text-primary">Not signed in</span>
-		}
-		@UserDropdownList() {
-			@UserDropdownListInfo("Organization", "TODO")
-			@UserDropdownListLink("Download CLI", "/cli")
-			@UserDropdownListLink("Log in", "/login")
-		}
-	}
-}
-
-templ UserDropdownImpl(picture string) {
-	<button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-		<span class="sr-only">Open user menu</span>
-		// no-referer is needed to avoid 403 on Google profile images:
-		// https://github.com/auth0-samples/auth0-react-samples/issues/221
-		<img class="w-8 h-8 rounded-full" src={ fmt.Sprint(templ.SafeURL(picture)) } alt="user photo" referrerpolicy="no-referrer"/>
-	</button>
-	<!-- Dropdown menu -->
-	<div class="z-50 hidden my-4 text-base list-none bg-surface divide-y divide-light rounded-lg shadow-md" id="user-dropdown">
-		{ children... }
-	</div>
-}
-
-templ UserDropdownSection() {
-	<div class="px-4 py-3">
-		{ children... }
-	</div>
-}
-
-templ UserDropdownList() {
-	<ul class="py-2 text-primary" aria-labelledby="user-menu-button">
-		{ children... }
-	</ul>
-}
-
-templ UserDropdownListInfo(title, text string) {
-	<li>
-		<div class="block px-4 py-2 text-sm text-primary hover:bg-secondary">
-			<span class="block text-sm text-primary">{ title }</span>
-			<span class="block text-sm text-secondary truncate">{ text }</span>
-		</div>
-	</li>
-}
-
-templ UserDropdownListLink(title, url string) {
-	<li>
-		<a href={ templ.URL(url) } class="block px-4 py-2 text-sm text-primary hover:bg-secondary">{ title }</a>
-	</li>
-}
-
-templ MenuItem(name, url string, active bool) {
-	<li>
-		if active {
-			<a href={ templ.URL(url) } class="block py-2 px-3 text-navbar rounded md:bg-transparent" aria-current="page">{ name }</a>
-		} else {
-			<a href={ templ.URL(url) } class="block py-2 px-3 text-navbar rounded md:bg-transparent" aria-current="page">{ name }</a>
-		}
-	</li>
-}
-
-templ DropdownMenu(id, name string) {
-	<li>
-		<button id="dropdownNavbarLink" data-dropdown-toggle={ id } class="block py-2 px-3 text-navbar rounded md:bg-transparent">
-			{ name }
-			//<svg class="ml-1.5 w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"></path></svg>
-		</button>
-		<!-- Dropdown menu -->
-		<div id={ id } class="hidden z-20 w-44 text-left font-normal bg-surface rounded divide-y divide-light shadow-md">
-			<ul class="py-1 text-sm text-primary" aria-labelledby="dropdownLargeButton">
-				{ children... }
-			</ul>
-		</div>
-	</li>
-}
-
-templ DropdownMenuItem(name, url string) {
-	<li>
-		<a href={ templ.URL(url) } class="block py-2 px-4 hover:bg-secondary">{ name }</a>
-	</li>
 }
 
 templ Footer(packageName, version string) {

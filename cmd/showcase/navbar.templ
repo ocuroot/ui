@@ -1,0 +1,49 @@
+package main
+
+import (
+    "github.com/ocuroot/ui/components/navbar"
+)
+
+// ShowcaseNavbar creates a consistent navbar for all showcase pages
+// activePage should be one of: "showcase", "modal", "table", "components"
+templ ShowcaseNavbar(activePage string) {
+    @navbar.Navbar(navbar.NavbarConfig{
+        BrandName: "Ocuroot",
+        BrandURL:  "/",
+        LogoURL:   "/static/logo.svg",
+        Items: []navbar.NavItem{
+            navbar.NavLink{
+                Name:   "Modal Components", 
+                URL:    "/modal", 
+                Active: activePage == "modal",
+            },
+            navbar.NavLink{
+                Name:   "Table Components", 
+                URL:    "/table", 
+                Active: activePage == "table",
+            },
+
+            navbar.NavDropdown{
+                ID:   "showcase",
+                Name: "Showcase",
+                Items: []navbar.DropdownItem{
+                    {Name: "Tabs", URL: "/components#tabs"},
+                    {Name: "Badges", URL: "/components#badges"},
+                    {Name: "Hero Sections", URL: "/components#hero"},
+                    {Name: "Progress", URL: "/components#progress"},
+                    {Name: "Links", URL: "/components#links"},
+                    {Name: "Icons", URL: "/components#icons"},
+                    {Name: "Forms", URL: "/components#forms"},
+                },
+            },
+            navbar.NavLink{
+                Name:   "All Components", 
+                URL:    "/components", 
+                Active: activePage == "components",
+            },
+        },
+        ShowThemeToggle: true,
+        ShowUserMenu:    false,
+        UserAvatarURL:   "/static/anon_user.svg",
+    })
+}

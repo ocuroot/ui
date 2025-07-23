@@ -1,0 +1,113 @@
+package navbar
+
+// NavItem interface allows mixing of links and dropdowns in any order
+type NavItem interface {
+	IsNavItem()
+}
+
+// NavLink represents a simple navigation link
+type NavLink struct {
+	Name   string
+	URL    string
+	Active bool
+}
+
+func (NavLink) IsNavItem() {}
+
+// DropdownItem represents an item within a dropdown menu
+type DropdownItem struct {
+	Name string
+	URL  string
+}
+
+// NavDropdown represents a dropdown menu with multiple items
+type NavDropdown struct {
+	ID    string
+	Name  string
+	Items []DropdownItem
+}
+
+func (NavDropdown) IsNavItem() {}
+
+type NavbarConfig struct {
+	BrandName       string
+	BrandURL        string
+	LogoURL         string
+	Items           []NavItem
+	ShowThemeToggle bool
+	ShowUserMenu    bool
+	UserAvatarURL   string
+}
+
+templ Navbar(config NavbarConfig) {
+	<nav class="ocuroot-navbar">
+		<div class="navbar-container">
+			<div class="navbar-brand">
+				<a href={ templ.URL(config.BrandURL) } class="brand-link">
+					if config.LogoURL != "" {
+						<img src={ config.LogoURL } alt={ config.BrandName } class="brand-logo"/>
+					}
+					<span class="brand-text">{ config.BrandName }</span>
+				</a>
+			</div>
+			
+			<button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+			</button>
+			
+			<div class="navbar-menu" id="navbar-menu">
+				<ul class="navbar-nav">
+					for _, item := range config.Items {
+						switch v := item.(type) {
+						case NavLink:
+							<li class="nav-item">
+								if v.Active {
+									<a href={ templ.URL(v.URL) } class="nav-link active" aria-current="page">{ v.Name }</a>
+								} else {
+									<a href={ templ.URL(v.URL) } class="nav-link">{ v.Name }</a>
+								}
+							</li>
+						case NavDropdown:
+							<li class="nav-item dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-dropdown={ v.ID }>
+									{ v.Name }
+									<span class="dropdown-arrow">▼</span>
+								</a>
+								<ul class="dropdown-menu" id={ v.ID }>
+									for _, dropdownItem := range v.Items {
+										<li><a href={ templ.URL(dropdownItem.URL) } class="dropdown-link">{ dropdownItem.Name }</a></li>
+									}
+								</ul>
+							</li>
+						}
+					}
+				</ul>
+				
+				<div class="navbar-actions">
+					if config.ShowThemeToggle {
+						<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+							<svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+								<!-- Moon icon (dark mode) -->
+								<path class="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+								<!-- Sun icon (light mode) -->
+								<g class="sun-icon" style="display: none;">
+									<circle cx="12" cy="12" r="5"/>
+									<path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+								</g>
+							</svg>
+						</button>
+					}
+					if config.ShowUserMenu {
+						<div class="user-menu">
+							<button class="user-button" aria-label="User menu">
+								<img src={ config.UserAvatarURL } alt="User" class="user-avatar"/>
+							</button>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</nav>
+}
