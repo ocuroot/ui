@@ -97,6 +97,11 @@ p {
     --progress-failed: #ef4444;
     --progress-bg: #e5e7eb;
     
+    /* Button Colors */
+    --button-primary-bg: #16a34a;
+    --button-primary-hover: #22c55e;
+    --button-primary-text: #ffffff;
+    
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -205,40 +210,42 @@ div.cut:before {
 }
 
 .button {
-    width: 100px;
-    padding: 20px;
-    color: black;
-    background-color: white;
-    clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px));
-    display: flex;
+    padding: 12px 24px;
+    color: var(--button-primary-text);
+    background-color: var(--button-primary-bg);
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px)) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px)) !important;
+    display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     position: relative;
+    border: none;
 
-    &::after {
-        content: "";
-        background-color: gray;
-        position: absolute;
-        top: 1px;
-        left: 1px;
+}
 
-        width: calc(100% - 2px);
-        height: calc(100% - 2px);
+.button::after {
+    content: "";
+    background-color: var(--button-primary-bg);
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px)) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px));
+    z-index: -1;
 
-        clip-path: polygon(0 0, 100% 0%, 100% 100%, 20px 100%, 0% calc(100% - 20px));
-        z-index: -1;
-    }
+}
 
-    &:hover {
-        background-color: lightgray;
-        cursor: pointer;
+.button:hover {
+    background-color: var(--button-primary-hover);
+    cursor: pointer;
+}
 
-        &::after {
-            background-color: lightgray;
-        }
-    }
+.button:hover::after {
+    background-color: var(--button-primary-hover);
 }
 
 /* Layout Utilities */

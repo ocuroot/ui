@@ -13,7 +13,7 @@ templ HeroSection(title, subtitle, ctaText, ctaURL string) {
 				<p class="hero-subtitle">{ subtitle }</p>
 				if ctaText != "" && ctaURL != "" {
 					<div class="hero-cta">
-						<a href={ templ.URL(ctaURL) } class="btn btn-primary">
+						<a href={ templ.URL(ctaURL) } class="button">
 							{ ctaText }
 							<svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -89,7 +89,7 @@ templ FeatureCard(icon, title, description, linkText, linkURL string) {
 		<h3 class="feature-title">{ title }</h3>
 		<p class="feature-description">{ description }</p>
 		if linkText != "" && linkURL != "" {
-			<a href={ templ.URL(linkURL) } class="feature-link">
+			<a href={ templ.URL(linkURL) } class="button">
 				{ linkText }
 				<svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
