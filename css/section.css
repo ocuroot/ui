@@ -152,12 +152,21 @@
     align-items: flex-start;
   }
   
-  .section-content-with-image.image-left {
-    flex-direction: row;
+  /* Image positioning using flexbox order */
+  .section-content-with-image.image-left .section-image {
+    order: 1;
   }
   
-  .section-content-with-image.image-right {
-    flex-direction: row-reverse;
+  .section-content-with-image.image-left .section-text-content {
+    order: 2;
+  }
+  
+  .section-content-with-image.image-right .section-image {
+    order: 2;
+  }
+  
+  .section-content-with-image.image-right .section-text-content {
+    order: 1;
   }
 }
 
