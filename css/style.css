@@ -97,10 +97,16 @@ p {
     --progress-failed: #ef4444;
     --progress-bg: #e5e7eb;
     
-    /* Button Colors */
-    --button-primary-bg: #16a34a;
-    --button-primary-hover: #22c55e;
+    /* Button Colors - Light Mode (lighter green) */
+    --button-primary-bg: #22c55e;
+    --button-primary-hover: #16a34a;
     --button-primary-text: #ffffff;
+    
+    /* Hero Section - Light Mode (blends to page background) */
+    --hero-bg-start: #f8fdf9;
+    --hero-bg-end: #fafafa;
+    --hero-overlay-start: rgba(255, 255, 255, 0.05);
+    --hero-overlay-end: rgba(255, 255, 255, 0.0);
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -150,17 +156,22 @@ p {
     --progress-failed: #f87171;
     --progress-bg: #374151;
     
+    /* Button Colors - Dark Mode (darker green) */
+    --button-primary-bg: #16a34a;
+    --button-primary-hover: #15803d;
+    --button-primary-text: #ffffff;
+    
     /* Adjust shadows for dark mode */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
     
-    /* Section Components - Dark Mode */
-    --hero-bg-start: #1e293b;
-    --hero-bg-end: #334155;
-    --hero-overlay-start: rgba(30, 41, 59, 0.85);
-    --hero-overlay-end: rgba(30, 41, 59, 0.9);
+    /* Hero Section - Dark Mode (blends to page background) */
+    --hero-bg-start: #064e3b;
+    --hero-bg-end: #242526;
+    --hero-overlay-start: rgba(0, 0, 0, 0.3);
+    --hero-overlay-end: rgba(0, 0, 0, 0.0);
     
     /* Links - Dark Mode */
     --link-color: #60a5fa;

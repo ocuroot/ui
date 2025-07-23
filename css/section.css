@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   min-height: 400px;
-  background: linear-gradient(135deg, var(--hero-bg-start, #dbeafe) 0%, var(--hero-bg-end, #e0e7ff) 100%);
+  background: linear-gradient(to bottom, var(--hero-bg-start, #064e3b) 0%, var(--hero-bg-end, #065f46) 100%);
 }
 
 .hero-background {
@@ -19,7 +19,7 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, var(--hero-overlay-start, rgba(255, 255, 255, 0.85)), var(--hero-overlay-end, rgba(255, 255, 255, 0.9)));
+  background: linear-gradient(to bottom, var(--hero-overlay-start, rgba(0, 0, 0, 0.3)), var(--hero-overlay-end, rgba(0, 0, 0, 0.2)));
 }
 
 .hero-content {
