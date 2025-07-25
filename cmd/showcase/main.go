@@ -7,9 +7,8 @@ import (
 
 	"github.com/a-h/templ"
 	"github.com/ocuroot/ui/assets"
-	"github.com/ocuroot/ui/components/card"
-	"github.com/ocuroot/ui/css"
 	"github.com/ocuroot/ui/components/grid"
+	"github.com/ocuroot/ui/css"
 	"github.com/ocuroot/ui/js"
 )
 
@@ -21,7 +20,6 @@ func main() {
 	cssService := css.NewService()
 	jsService := js.NewService()
 	cssClasses := []templ.CSSClass{header()}
-	cssClasses = append(cssClasses, card.AllCSS()...)
 	cssClasses = append(cssClasses, grid.AllCSS()...)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -41,14 +39,14 @@ func main() {
 		componentsShowcase.Render(r.Context(), w)
 	})
 	http.HandleFunc("/style.css", cssService.ServeCSS)
-	
+
 	// Legacy endpoints for backward compatibility (redirect to unified CSS)
 	http.HandleFunc("/css/style.css", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/style.css", http.StatusMovedPermanently)
 	})
-	
+
 	http.HandleFunc("/script.js", jsService.ServeJS)
-	
+
 	// Legacy endpoints for backward compatibility (redirect to unified JS)
 	http.HandleFunc("/components/navbar/navbar.js", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/script.js", http.StatusMovedPermanently)
