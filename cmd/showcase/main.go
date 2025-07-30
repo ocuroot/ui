@@ -5,9 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/a-h/templ"
 	"github.com/ocuroot/ui/assets"
-	"github.com/ocuroot/ui/components/grid"
 	"github.com/ocuroot/ui/css"
 	"github.com/ocuroot/ui/js"
 )
@@ -19,8 +17,6 @@ func main() {
 	// Initialize the unified CSS and JS services
 	cssService := css.NewService()
 	jsService := js.NewService()
-	cssClasses := []templ.CSSClass{header()}
-	cssClasses = append(cssClasses, grid.AllCSS()...)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		showcase := Showcase()
@@ -51,17 +47,21 @@ func main() {
 	http.HandleFunc("/components/navbar/navbar.js", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/script.js", http.StatusMovedPermanently)
 	})
+
 	http.HandleFunc("/static/js/htmx.min.js", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/script.js", http.StatusMovedPermanently)
 	})
+
 	http.HandleFunc("/static/logo.svg", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/svg+xml")
 		w.Write([]byte(assets.Logo))
 	})
+
 	http.HandleFunc("/static/anon_user.svg", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/svg+xml")
 		w.Write(assets.AnonUser)
 	})
+
 	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/x-icon")
 		w.Write(assets.Favicon)
@@ -69,7 +69,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", *flagPort),
-		Handler: templ.NewCSSMiddleware(http.DefaultServeMux, cssClasses...),
+		Handler: http.DefaultServeMux,
 	}
 	fmt.Printf("Listening on port %d\n", *flagPort)
 	if err := srv.ListenAndServe(); err != nil {

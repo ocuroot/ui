@@ -15,12 +15,21 @@ html, body {
 /* Remove default link styling */
 a {
     text-decoration: none;
-    color: inherit;
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--link-hover-color);
 }
 
 /* Remove default list styling */
 ul, ol {
     list-style: none;
+}
+
+.list-style-circle {
+    margin-left: 1rem;
+    list-style: circle;
 }
 
 /* Remove default button styling */
@@ -51,6 +60,8 @@ table {
 /* Remove default heading margins */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     font-weight: inherit;
 }
 
@@ -96,6 +107,10 @@ p {
     --progress-complete: #22c55e;
     --progress-failed: #ef4444;
     --progress-bg: #e5e7eb;
+
+    /* Link colors */
+    --link-color: #16a34a;
+    --link-hover-color: #22c55e;
     
     /* Button Colors - Light Mode (lighter green) */
     --button-primary-bg: #22c55e;
@@ -166,6 +181,10 @@ p {
     --progress-failed: #f87171;
     --progress-bg: #374151;
     
+    /* Link colors */
+    --link-color: #16a34a;
+    --link-hover-color: #22c55e;
+
     /* Button Colors - Dark Mode (darker green) */
     --button-primary-bg: #16a34a;
     --button-primary-hover: #15803d;
@@ -182,18 +201,6 @@ p {
     --hero-bg-end: #242526;
     --hero-overlay-start: rgba(0, 0, 0, 0.3);
     --hero-overlay-end: rgba(0, 0, 0, 0.0);
-    
-    /* Links - Dark Mode */
-    --link-color: #60a5fa;
-    --link-bg: #1e3a8a;
-    --link-border: #3b82f6;
-    --link-bg-hover: #1d4ed8;
-    
-    /* Buttons - Dark Mode */
-    --btn-primary-text: #ffffff;
-    --btn-primary-bg: #3b82f6;
-    --btn-primary-bg-hover: #2563eb;
-    --btn-primary-focus: #60a5fa;
     
     /* Feature Icons - Dark Mode */
     --icon-green-bg: #064e3b;
@@ -658,3 +665,24 @@ body {
 .mt-3 { margin-top: 0.75rem; }
 .sm\:mt-0 { margin-top: 0; }
 .sm\:text-center { text-align: center; }
+
+.card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--rounded-lg);
+    box-shadow: var(--shadow-md);
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.card pre {
+    overflow-x: scroll;
+}
+
+.subtitle {
+    margin-top: -0.5rem;
+    padding-top: 0px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--text-secondary);
+}

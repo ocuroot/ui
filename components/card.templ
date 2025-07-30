@@ -10,7 +10,7 @@ func addClasses(defaults string, classes []string) string {
 }
 
 templ Card(class ...string) {
-	<div class={ addClasses("block p-6 mr-4 mb-4 bg-white border border-gray-200 rounded-lg shadow", class) }>
+	<div class={ addClasses("card", class) }>
 		{ children... }
 	</div>
 }
