@@ -20,8 +20,8 @@ templ ShowcaseLayout(activePage, title, description string) {
         <body>
             @ShowcaseNavbar(activePage)
             @components.Container() {
-                <h1 class="text-3xl font-bold mb-6">{ title }</h1>
-                <p class="mb-6 text-secondary">{ description }</p>
+                <h1>{ title }</h1>
+                <p class="subtitle">{ description }</p>
                 { children... }
             }
             @js.UnifiedJSScript()

@@ -2,6 +2,7 @@ package main
 
 import (
     "github.com/ocuroot/ui/components/buttons"
+    "github.com/ocuroot/ui/components/layout"
 )
 
 var red string = "#ff0000"
@@ -12,6 +13,18 @@ css header() {
 
 templ Showcase() {
     @ShowcaseLayout("showcase", "UI Showcase", "This is a showcase of the UI components.") {
+            <div id="test">
+                @layout.Row() {
+                    @layout.Column() {
+                        <h2>Left side</h2>
+                        <div>Left</div>
+                    }
+                    @layout.Sidebar() {
+                        <h2>Right side</h2>
+                        <div>Right</div>
+                    }
+                }
+            </div>
             <div id="buttons">
                 <h2>Button Components</h2>
                 @buttons.Button() {

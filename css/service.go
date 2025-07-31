@@ -9,6 +9,8 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/ocuroot/ui/components/layout"
 )
 
 //go:embed style.css
@@ -32,7 +34,7 @@ func NewService() *Service {
 	// Generate ETag from CSS content hash
 	hash := sha256.Sum256([]byte(combined))
 	etag := hex.EncodeToString(hash[:8]) // Use first 8 bytes for shorter ETag
-	
+
 	return &Service{
 		combinedCSS: combined,
 		etag:        etag,
@@ -42,26 +44,34 @@ func NewService() *Service {
 // combineCSS concatenates the main CSS, navbar CSS, and section CSS with proper separators
 func combineCSS() string {
 	var builder strings.Builder
-	
+
 	// Add main CSS
 	builder.WriteString(mainCSS)
-	
+
 	// Add separator
 	builder.WriteString("\n\n/* =========================================\n")
 	builder.WriteString(" * NAVBAR CSS - Combined from navbar.css\n")
 	builder.WriteString(" * ========================================= */\n\n")
-	
+
 	// Add navbar CSS
 	builder.WriteString(navbarCSS)
-	
+
 	// Add separator
 	builder.WriteString("\n\n/* =========================================\n")
 	builder.WriteString(" * SECTION CSS - Combined from section.css\n")
 	builder.WriteString(" * ========================================= */\n\n")
-	
+
 	// Add section CSS
 	builder.WriteString(sectionCSS)
-	
+
+	// Add separator
+	builder.WriteString("\n\n/* =========================================\n")
+	builder.WriteString(" * COLUMN CSS - Combined from columns.css\n")
+	builder.WriteString(" * ========================================= */\n\n")
+
+	// Add columns CSS
+	builder.WriteString(string(layout.CSS))
+
 	return builder.String()
 }
 
@@ -70,13 +80,13 @@ func (s *Service) ServeCSS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/css; charset=utf-8")
 	w.Header().Set("Cache-Control", "public, max-age=3600")
 	w.Header().Set("ETag", fmt.Sprintf(`"%s"`, s.etag))
-	
+
 	// Check if client has cached version
 	if r.Header.Get("If-None-Match") == fmt.Sprintf(`"%s"`, s.etag) {
 		w.WriteHeader(http.StatusNotModified)
 		return
 	}
-	
+
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(s.combinedCSS))
 }
