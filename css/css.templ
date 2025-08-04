@@ -2,5 +2,5 @@ package css
 
 // UnifiedCSSLink renders a link tag to the unified CSS endpoint
 templ UnifiedCSSLink() {
-	<link href={ NewService().GetVersionedURL() } rel="stylesheet"/>
+	<link href={ Default().GetVersionedURL() } rel="stylesheet"/>
 }

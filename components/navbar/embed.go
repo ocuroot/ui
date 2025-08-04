@@ -14,6 +14,6 @@ var CSS []byte
 var JS []byte
 
 func init() {
-	css.Register("navbar", CSS)
-	js.Register("navbar", JS)
+	css.Default().Add(CSS)
+	js.Default().Add(JS)
 }

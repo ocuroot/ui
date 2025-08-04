@@ -10,5 +10,5 @@ import (
 var CSS []byte
 
 func init() {
-	css.Register("section", CSS)
+	css.Default().Add(CSS)
 }
