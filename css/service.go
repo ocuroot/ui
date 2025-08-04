@@ -66,6 +66,10 @@ func combineCSS() string {
 	return builder.String()
 }
 
+func (s *Service) GetVersionedURL() string {
+	return fmt.Sprintf("/%s.css", s.etag)
+}
+
 // ServeCSS serves the combined CSS with proper HTTP headers
 func (s *Service) ServeCSS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/css; charset=utf-8")

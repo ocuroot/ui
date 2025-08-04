@@ -51,6 +51,10 @@ func NewService() *Service {
 	}
 }
 
+func (s *Service) GetVersionedURL() string {
+	return fmt.Sprintf("/%s.js", s.etag)
+}
+
 // combineJS concatenates the JavaScript files with proper separators
 func combineJS() string {
 	var builder strings.Builder

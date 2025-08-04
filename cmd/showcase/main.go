@@ -36,23 +36,8 @@ func main() {
 		componentsShowcase := ComponentsShowcase()
 		componentsShowcase.Render(r.Context(), w)
 	})
-	http.HandleFunc("/style.css", cssService.ServeCSS)
-
-	// Legacy endpoints for backward compatibility (redirect to unified CSS)
-	http.HandleFunc("/css/style.css", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/style.css", http.StatusMovedPermanently)
-	})
-
-	http.HandleFunc("/script.js", jsService.ServeJS)
-
-	// Legacy endpoints for backward compatibility (redirect to unified JS)
-	http.HandleFunc("/components/navbar/navbar.js", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/script.js", http.StatusMovedPermanently)
-	})
-
-	http.HandleFunc("/static/js/htmx.min.js", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/script.js", http.StatusMovedPermanently)
-	})
+	http.HandleFunc(cssService.GetVersionedURL(), cssService.ServeCSS)
+	http.HandleFunc(jsService.GetVersionedURL(), jsService.ServeJS)
 
 	http.HandleFunc("/static/logo.svg", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/svg+xml")
