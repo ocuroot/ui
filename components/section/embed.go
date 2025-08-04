@@ -1,4 +1,4 @@
-package layout
+package section
 
 import (
 	_ "embed"
@@ -6,9 +6,9 @@ import (
 	"github.com/ocuroot/ui/css"
 )
 
-//go:embed style.css
+//go:embed section.css
 var CSS []byte
 
 func init() {
-	css.Register("layout", CSS)
+	css.Register("section", CSS)
 }

@@ -8,6 +8,8 @@ import (
 	"github.com/ocuroot/ui/assets"
 	"github.com/ocuroot/ui/css"
 	"github.com/ocuroot/ui/js"
+
+	"github.com/NYTimes/gziphandler"
 )
 
 func main() {
@@ -69,7 +71,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", *flagPort),
-		Handler: http.DefaultServeMux,
+		Handler: gziphandler.GzipHandler(http.DefaultServeMux),
 	}
 	fmt.Printf("Listening on port %d\n", *flagPort)
 	if err := srv.ListenAndServe(); err != nil {

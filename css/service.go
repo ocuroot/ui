@@ -9,23 +9,33 @@ import (
 	"io"
 	"net/http"
 	"strings"
-
-	"github.com/ocuroot/ui/components/layout"
 )
 
 //go:embed style.css
 var mainCSS string
 
-//go:embed navbar.css
-var navbarCSS string
-
-//go:embed section.css
-var sectionCSS string
+func init() {
+	Register("style", []byte(mainCSS))
+}
 
 // Service provides unified CSS serving functionality
 type Service struct {
 	combinedCSS string
 	etag        string
+}
+
+type cssRegistration struct {
+	Name string
+	CSS  []byte
+}
+
+var registeredCSS []cssRegistration
+
+func Register(name string, content []byte) {
+	registeredCSS = append(registeredCSS, cssRegistration{
+		Name: name,
+		CSS:  content,
+	})
 }
 
 // NewService creates a new CSS service with combined CSS content
@@ -45,32 +55,13 @@ func NewService() *Service {
 func combineCSS() string {
 	var builder strings.Builder
 
-	// Add main CSS
-	builder.WriteString(mainCSS)
-
-	// Add separator
-	builder.WriteString("\n\n/* =========================================\n")
-	builder.WriteString(" * NAVBAR CSS - Combined from navbar.css\n")
-	builder.WriteString(" * ========================================= */\n\n")
-
-	// Add navbar CSS
-	builder.WriteString(navbarCSS)
-
-	// Add separator
-	builder.WriteString("\n\n/* =========================================\n")
-	builder.WriteString(" * SECTION CSS - Combined from section.css\n")
-	builder.WriteString(" * ========================================= */\n\n")
-
-	// Add section CSS
-	builder.WriteString(sectionCSS)
-
-	// Add separator
-	builder.WriteString("\n\n/* =========================================\n")
-	builder.WriteString(" * COLUMN CSS - Combined from columns.css\n")
-	builder.WriteString(" * ========================================= */\n\n")
-
-	// Add columns CSS
-	builder.WriteString(string(layout.CSS))
+	// Add registered CSS
+	for _, css := range registeredCSS {
+		builder.WriteString("\n\n/* =========================================\n")
+		builder.WriteString(" * " + css.Name + "\n")
+		builder.WriteString(" * ========================================= */\n\n")
+		builder.WriteString(string(css.CSS))
+	}
 
 	return builder.String()
 }
@@ -101,24 +92,4 @@ func (s *Service) Render(ctx context.Context, w io.Writer) error {
 // GetCombinedCSS returns the combined CSS content
 func (s *Service) GetCombinedCSS() string {
 	return s.combinedCSS
-}
-
-// GetCSSSize returns the size of the combined CSS in bytes
-func (s *Service) GetCSSSize() int {
-	return len(s.combinedCSS)
-}
-
-// GetMainCSSSize returns the size of the main CSS in bytes
-func (s *Service) GetMainCSSSize() int {
-	return len(mainCSS)
-}
-
-// GetNavbarCSSSize returns the size of the navbar CSS in bytes
-func (s *Service) GetNavbarCSSSize() int {
-	return len(navbarCSS)
-}
-
-// GetSectionCSSSize returns the size of the section CSS in bytes
-func (s *Service) GetSectionCSSSize() int {
-	return len(sectionCSS)
 }
