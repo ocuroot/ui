@@ -8,11 +8,6 @@ body {
     flex-direction: column;
 }
 
-.main-fill {
-    flex: 1 1 auto;
-    display: flex;
-}
-
 .row {
     display: flex;
     box-sizing: border-box;

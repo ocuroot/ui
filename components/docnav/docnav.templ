@@ -45,7 +45,42 @@ func linkClass(active bool) string {
 	return "docnav-link"
 }
 
-templ DocNav(p DocNavProps) {
+// Returns section heading and label for the current path by scanning links and children.
+func currentSection(p DocNavProps) string {
+    current := strings.TrimSuffix(p.CurrentPath, "/")
+    for _, s := range p.Sections {
+        for _, l := range s.Links {
+            if strings.TrimSuffix(string(l.URL), "/") == current {
+                return s.Heading
+            }
+            for _, c := range l.Children {
+                if strings.TrimSuffix(string(c.URL), "/") == current {
+                    return s.Heading
+                }
+            }
+        }
+    }
+    return ""
+}
+
+func currentLabel(p DocNavProps) string {
+    current := strings.TrimSuffix(p.CurrentPath, "/")
+    for _, s := range p.Sections {
+        for _, l := range s.Links {
+            if strings.TrimSuffix(string(l.URL), "/") == current {
+                return l.Title
+            }
+            for _, c := range l.Children {
+                if strings.TrimSuffix(string(c.URL), "/") == current {
+                    return c.Title
+                }
+            }
+        }
+    }
+    return ""
+}
+
+templ DocNavDesktop(p DocNavProps) {
 	<nav class="docnav">
 		for _, section := range p.Sections {
 			<div class="docnav-section">
@@ -71,4 +106,66 @@ templ DocNav(p DocNavProps) {
 			</div>
 		}
 	</nav>
+}
+
+templ DocNavMobile(p DocNavProps) {
+    <div class="docnav-mobile">
+        <details class="docnav-dropdown">
+            <summary class="docnav-dropdown-summary">
+                <div class="docnav-breadcrumb">
+                    if currentSection(p) != "" {
+                        <span>{ currentSection(p) }</span>
+                    }
+                    if currentSection(p) != "" && currentLabel(p) != "" {
+                        <span class="sep">/</span>
+                    }
+                    if currentLabel(p) != "" {
+                        <span>{ currentLabel(p) }</span>
+                    }
+                </div>
+                <svg class="docnav-caret" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </summary>
+            <div class="docnav-dropdown-panel">
+                <nav class="docnav">
+                    for _, section := range p.Sections {
+                        <div class="docnav-section">
+                            if section.Heading != "" {
+                                <div class="docnav-section-heading">{ section.Heading }</div>
+                            }
+                            <ul class="docnav-list">
+                                for _, l := range section.Links {
+                                    <li>
+                                        <a href={ l.URL } class={ linkClass(isActiveOrDescendant(p.CurrentPath, l)) }>{ l.Title }</a>
+                                        if len(l.Children) > 0 {
+                                            <ul class="docnav-sublist">
+                                                for _, sl := range l.Children {
+                                                    <li>
+                                                        <a href={ sl.URL } class={ linkClass(isActive(p.CurrentPath, sl.URL)) }>{ sl.Title }</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </nav>
+            </div>
+        </details>
+    </div>
+}
+
+templ DocNav(p DocNavProps) {
+    <div class="docnav-container">
+        @DocNavMobile(p)
+        <div class="docnav-sidebar sidebar-separator">
+            @DocNavDesktop(p)
+        </div>
+        <div class="docnav-content">
+            { children... }
+        </div>
+    </div>
 }

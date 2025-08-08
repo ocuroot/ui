@@ -3,81 +3,9 @@ package main
 import (
     "github.com/ocuroot/ui/components"
     "github.com/ocuroot/ui/components/docnav"
-    "github.com/ocuroot/ui/components/layout"
     "github.com/ocuroot/ui/css"
     "github.com/ocuroot/ui/js"
 )
-
-// Full-page showcase where the docs nav is outside the main content container
-// and appears to the left of (and above) the page title/content.
-templ DocNavShowcasePage() {
-    <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>DocNav Showcase - Ocuroot</title>
-            @css.UnifiedCSSLink()
-        </head>
-        <body>
-            @ShowcaseNavbar("docnav")
-            <div class="main-fill row">
-                <div class="docnav-sidebar sidebar-separator">
-                    @docnav.DocNav(docnav.DocNavProps{
-                        CurrentPath: "/docs/getting-started",
-                        Sections: []docnav.NavSection{
-                            {
-                                Heading: "Getting Started",
-                                Links: []docnav.NavLink{
-                                    {Title: "Introduction", URL: "/docs/intro"},
-                                    {Title: "Quickstart", URL: "/docs/getting-started"},
-                                    {Title: "Install", URL: "/docs/install"},
-                                },
-                            },
-                            {
-                                Heading: "Guides",
-                                Links: []docnav.NavLink{
-                                    {Title: "Projects", URL: "/docs/guides/projects"},
-                                    {Title: "Deployments", URL: "/docs/guides/deployments"},
-                                    {Title: "Environments", URL: "/docs/guides/environments"},
-                                },
-                            },
-                            {
-                                Heading: "Reference",
-                                Links: []docnav.NavLink{
-                                    {Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
-                                        {Title: "Commands", URL: "/docs/reference/cli/commands"},
-                                        {Title: "Config", URL: "/docs/reference/cli/config"},
-                                    }},
-                                    {Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
-                                        {Title: "Go", URL: "/docs/reference/sdk/go"},
-                                        {Title: "JavaScript", URL: "/docs/reference/sdk/js"},
-                                    }},
-                                    {Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
-                                        {Title: "Auth", URL: "/docs/reference/api/auth"},
-                                        {Title: "Releases", URL: "/docs/reference/api/releases"},
-                                    }},
-                                },
-                            },
-                        },
-                    })
-                </div>
-                <div class="column">
-                    @components.Container() {
-                        <h1>DocNav Showcase</h1>
-                        <p class="subtitle">Left documentation navigation lives outside the main content container and above the page title.</p>
-                        @layout.Row() {
-                            @layout.Column() {
-                                <p>This demo shows the left navigation in a fixed sidebar, with the page content on the right.</p>
-                            }
-                        }
-                    }
-                </div>
-            </div>
-            @js.UnifiedJSScript()
-        </body>
-    </html>
-}
 
 // Individual example pages to demonstrate active highlighting via URL
 templ DocIntroPage() {
@@ -91,55 +19,13 @@ templ DocIntroPage() {
         </head>
         <body>
             @ShowcaseNavbar("docnav")
-            <div class="main-fill row">
-                <div class="docnav-sidebar sidebar-separator">
-                    @docnav.DocNav(docnav.DocNavProps{
-                        CurrentPath: "/docs/intro",
-                        Sections: []docnav.NavSection{
-                            {
-                                Heading: "Getting Started",
-                                Links: []docnav.NavLink{
-                                    {Title: "Introduction", URL: "/docs/intro"},
-                                    {Title: "Quickstart", URL: "/docs/getting-started"},
-                                    {Title: "Install", URL: "/docs/install"},
-                                },
-                            },
-                            {
-                                Heading: "Guides",
-                                Links: []docnav.NavLink{
-                                    {Title: "Projects", URL: "/docs/guides/projects"},
-                                    {Title: "Deployments", URL: "/docs/guides/deployments"},
-                                    {Title: "Environments", URL: "/docs/guides/environments"},
-                                },
-                            },
-                            {
-                                Heading: "Reference",
-                                Links: []docnav.NavLink{
-                                    {Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
-                                        {Title: "Commands", URL: "/docs/reference/cli/commands"},
-                                        {Title: "Config", URL: "/docs/reference/cli/config"},
-                                    }},
-                                    {Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
-                                        {Title: "Go", URL: "/docs/reference/sdk/go"},
-                                        {Title: "JavaScript", URL: "/docs/reference/sdk/js"},
-                                    }},
-                                    {Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
-                                        {Title: "Auth", URL: "/docs/reference/api/auth"},
-                                        {Title: "Releases", URL: "/docs/reference/api/releases"},
-                                    }},
-                                },
-                            },
-                        },
-                    })
-                </div>
-                <div class="column">
-                    @components.Container() {
-                        <h1>Introduction</h1>
-                        <p class="subtitle">Overview of Ocuroot and what problems it solves.</p>
-                        <p class="mt-4">This is a simple placeholder for the introduction content.</p>
-                    }
-                </div>
-            </div>
+            @ExampleDocNav("/docs/intro") {
+                @components.Container() {
+                    <h1>Introduction</h1>
+                    <p class="subtitle">Overview of Ocuroot and what problems it solves.</p>
+                    <p class="mt-4">This is a simple placeholder for the introduction content.</p>
+                }
+            }
             @js.UnifiedJSScript()
         </body>
     </html>
@@ -156,47 +42,7 @@ templ DocQuickstartPage() {
         </head>
         <body>
             @ShowcaseNavbar("docnav")
-            <div class="main-fill row">
-                <div class="docnav-sidebar sidebar-separator">
-                    @docnav.DocNav(docnav.DocNavProps{
-                        CurrentPath: "/docs/getting-started",
-                        Sections: []docnav.NavSection{
-                            {
-                                Heading: "Getting Started",
-                                Links: []docnav.NavLink{
-                                    {Title: "Introduction", URL: "/docs/intro"},
-                                    {Title: "Quickstart", URL: "/docs/getting-started"},
-                                    {Title: "Install", URL: "/docs/install"},
-                                },
-                            },
-                            {
-                                Heading: "Guides",
-                                Links: []docnav.NavLink{
-                                    {Title: "Projects", URL: "/docs/guides/projects"},
-                                    {Title: "Deployments", URL: "/docs/guides/deployments"},
-                                    {Title: "Environments", URL: "/docs/guides/environments"},
-                                },
-                            },
-                            {
-                                Heading: "Reference",
-                                Links: []docnav.NavLink{
-                                    {Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
-                                        {Title: "Commands", URL: "/docs/reference/cli/commands"},
-                                        {Title: "Config", URL: "/docs/reference/cli/config"},
-                                    }},
-                                    {Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
-                                        {Title: "Go", URL: "/docs/reference/sdk/go"},
-                                        {Title: "JavaScript", URL: "/docs/reference/sdk/js"},
-                                    }},
-                                    {Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
-                                        {Title: "Auth", URL: "/docs/reference/api/auth"},
-                                        {Title: "Releases", URL: "/docs/reference/api/releases"},
-                                    }},
-                                },
-                            },
-                        },
-                    })
-                </div>
+            @ExampleDocNav("/docs/getting-started") {
                 <div class="column">
                     @components.Container() {
                         <h1>Quickstart</h1>
@@ -208,7 +54,7 @@ templ DocQuickstartPage() {
                         </ol>
                     }
                 </div>
-            </div>
+            }
             @js.UnifiedJSScript()
         </body>
     </html>
@@ -226,47 +72,7 @@ templ DocInstallPage() {
         <body>
             @ShowcaseNavbar("docnav")
             <div class="main-fill row">
-                <div class="docnav-sidebar sidebar-separator">
-                    @docnav.DocNav(docnav.DocNavProps{
-                        CurrentPath: "/docs/install",
-                        Sections: []docnav.NavSection{
-                            {
-                                Heading: "Getting Started",
-                                Links: []docnav.NavLink{
-                                    {Title: "Introduction", URL: "/docs/intro"},
-                                    {Title: "Quickstart", URL: "/docs/getting-started"},
-                                    {Title: "Install", URL: "/docs/install"},
-                                },
-                            },
-                            {
-                                Heading: "Guides",
-                                Links: []docnav.NavLink{
-                                    {Title: "Projects", URL: "/docs/guides/projects"},
-                                    {Title: "Deployments", URL: "/docs/guides/deployments"},
-                                    {Title: "Environments", URL: "/docs/guides/environments"},
-                                },
-                            },
-                            {
-                                Heading: "Reference",
-                                Links: []docnav.NavLink{
-                                    {Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
-                                        {Title: "Commands", URL: "/docs/reference/cli/commands"},
-                                        {Title: "Config", URL: "/docs/reference/cli/config"},
-                                    }},
-                                    {Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
-                                        {Title: "Go", URL: "/docs/reference/sdk/go"},
-                                        {Title: "JavaScript", URL: "/docs/reference/sdk/js"},
-                                    }},
-                                    {Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
-                                        {Title: "Auth", URL: "/docs/reference/api/auth"},
-                                        {Title: "Releases", URL: "/docs/reference/api/releases"},
-                                    }},
-                                },
-                            },
-                        },
-                    })
-                </div>
-                <div class="column">
+                @ExampleDocNav("/docs/install") {
                     @components.Container() {
                         <h1>Install</h1>
                         <p class="subtitle">How to install Ocuroot on your system.</p>
@@ -276,9 +82,52 @@ templ DocInstallPage() {
                             <li>Windows: Use Scoop or download the installer</li>
                         </ul>
                     }
-                </div>
+                }
             </div>
             @js.UnifiedJSScript()
         </body>
     </html>
+}
+
+templ ExampleDocNav(currentPath string) {
+    @docnav.DocNav(docnav.DocNavProps{
+        CurrentPath: currentPath,
+        Sections: []docnav.NavSection{
+            {
+                Heading: "Getting Started",
+                Links: []docnav.NavLink{
+                    {Title: "Introduction", URL: "/docs/intro"},
+                    {Title: "Quickstart", URL: "/docs/getting-started"},
+                    {Title: "Install", URL: "/docs/install"},
+                },
+            },
+            {
+                Heading: "Guides",
+                Links: []docnav.NavLink{
+                    {Title: "Projects", URL: "/docs/guides/projects"},
+                    {Title: "Deployments", URL: "/docs/guides/deployments"},
+                    {Title: "Environments", URL: "/docs/guides/environments"},
+                },
+            },
+            {
+                Heading: "Reference",
+                Links: []docnav.NavLink{
+                    {Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
+                        {Title: "Commands", URL: "/docs/reference/cli/commands"},
+                        {Title: "Config", URL: "/docs/reference/cli/config"},
+                    }},
+                    {Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
+                        {Title: "Go", URL: "/docs/reference/sdk/go"},
+                        {Title: "JavaScript", URL: "/docs/reference/sdk/js"},
+                    }},
+                    {Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
+                        {Title: "Auth", URL: "/docs/reference/api/auth"},
+                        {Title: "Releases", URL: "/docs/reference/api/releases"},
+                    }},
+                },
+            },
+        },
+    }) {
+        { children... }
+    }
 }

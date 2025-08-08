@@ -20,10 +20,6 @@ func main() {
 		showcase := Showcase()
 		showcase.Render(r.Context(), w)
 	})
-	http.HandleFunc("/docnav", func(w http.ResponseWriter, r *http.Request) {
-		page := DocNavShowcasePage()
-		page.Render(r.Context(), w)
-	})
 	http.HandleFunc("/docs/intro", func(w http.ResponseWriter, r *http.Request) {
 		page := DocIntroPage()
 		page.Render(r.Context(), w)
