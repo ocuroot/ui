@@ -50,6 +50,11 @@ func ShowcaseNavbar(activePage string) templ.Component {
 					URL:    "/table",
 					Active: activePage == "table",
 				},
+				navbar.NavLink{
+					Name:   "DocNav",
+					URL:    "/docnav",
+					Active: activePage == "docnav",
+				},
 
 				navbar.NavDropdown{
 					ID:   "showcase",

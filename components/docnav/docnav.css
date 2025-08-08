@@ -1,0 +1,26 @@
+/* =========================================
+ * DOCNAV COMPONENT CSS
+ * ========================================= */
+
+.docnav-section-heading {
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.docnav-link {
+  color: var(--text-secondary);
+  background-color: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  display: block;
+}
+
+.docnav-link:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.docnav-link--active {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border-left-color: var(--border-color);
+}

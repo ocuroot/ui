@@ -1,0 +1,52 @@
+package docnav
+
+import (
+	"strings"
+)
+
+type NavLink struct {
+	Title string
+	URL   templ.SafeURL
+}
+
+type NavSection struct {
+	Heading string
+	Links   []NavLink
+}
+
+type DocNavProps struct {
+	Sections    []NavSection
+	CurrentPath string
+}
+
+func isActive(current string, url templ.SafeURL) bool {
+	c := strings.TrimSuffix(current, "/")
+	u := strings.TrimSuffix(string(url), "/")
+	return c == u
+}
+
+func linkClass(active bool) string {
+	if active {
+		return "docnav-link docnav-link--active block px-4 py-2 font-medium border-l-2"
+	}
+	return "docnav-link block px-4 py-2"
+}
+
+templ DocNav(p DocNavProps) {
+	<nav class="w-full h-full">
+		for _, section := range p.Sections {
+			<div class="mb-6">
+				if section.Heading != "" {
+					<div class="docnav-section-heading px-4 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide">{ section.Heading }</div>
+				}
+				<ul class="mt-2 space-y-1">
+					for _, l := range section.Links {
+						<li>
+							<a href={ l.URL } class={ linkClass(isActive(p.CurrentPath, l.URL)) }>{ l.Title }</a>
+						</li>
+					}
+				</ul>
+			</div>
+		}
+	</nav>
+}

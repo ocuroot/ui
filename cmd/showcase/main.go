@@ -20,6 +20,22 @@ func main() {
 		showcase := Showcase()
 		showcase.Render(r.Context(), w)
 	})
+	http.HandleFunc("/docnav", func(w http.ResponseWriter, r *http.Request) {
+		page := DocNavShowcasePage()
+		page.Render(r.Context(), w)
+	})
+	http.HandleFunc("/docs/intro", func(w http.ResponseWriter, r *http.Request) {
+		page := DocIntroPage()
+		page.Render(r.Context(), w)
+	})
+	http.HandleFunc("/docs/getting-started", func(w http.ResponseWriter, r *http.Request) {
+		page := DocQuickstartPage()
+		page.Render(r.Context(), w)
+	})
+	http.HandleFunc("/docs/install", func(w http.ResponseWriter, r *http.Request) {
+		page := DocInstallPage()
+		page.Render(r.Context(), w)
+	})
 	http.HandleFunc("/modal", func(w http.ResponseWriter, r *http.Request) {
 		modalShowcase := ModalShowcase()
 		modalShowcase.Render(r.Context(), w)

@@ -22,6 +22,11 @@ templ ShowcaseNavbar(activePage string) {
                 URL:    "/table", 
                 Active: activePage == "table",
             },
+            navbar.NavLink{
+                Name:   "DocNav", 
+                URL:    "/docnav", 
+                Active: activePage == "docnav",
+            },
 
             navbar.NavDropdown{
                 ID:   "showcase",
