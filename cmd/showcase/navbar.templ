@@ -5,7 +5,6 @@ import (
 )
 
 // ShowcaseNavbar creates a consistent navbar for all showcase pages
-// activePage should be one of: "showcase", "modal", "table", "components"
 templ ShowcaseNavbar(activePage string) {
     @navbar.Navbar(navbar.NavbarConfig{
         BrandName: "Ocuroot",
@@ -23,9 +22,9 @@ templ ShowcaseNavbar(activePage string) {
                 Active: activePage == "table",
             },
             navbar.NavLink{
-                Name:   "DocNav", 
+                Name:   "Docs", 
                 URL:    "/docs/intro", 
-                Active: activePage == "/docs/intro",
+                Active: activePage == "docs",
             },
 
             navbar.NavDropdown{
@@ -49,6 +48,5 @@ templ ShowcaseNavbar(activePage string) {
         },
         ShowThemeToggle: true,
         ShowUserMenu:    false,
-        UserAvatarURL:   "/static/anon_user.svg",
     })
 }

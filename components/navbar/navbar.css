@@ -22,9 +22,6 @@
 /* Brand/Logo */
 .navbar-brand {
   flex-shrink: 0;
-}
-
-.brand-link {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -204,27 +201,20 @@
 }
 
 .theme-icon {
-  display: block;
   width: 20px;
   height: 20px;
-  stroke: currentColor;
   fill: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
-/* Ensure flat appearance */
+/* Icon styling */
 .moon-icon,
 .sun-icon {
   fill: currentColor;
-  stroke: none;
 }
 
 .sun-icon path {
   stroke: currentColor;
   fill: none;
-  stroke-width: 2;
 }
 
 .user-button {
@@ -318,7 +308,7 @@
   }
 }
 
-/* Dark mode adjustments */
+/* Color scheme adjustments */
 @media (prefers-color-scheme: dark) {
   .ocuroot-navbar {
     --navbar-bg: #1f2021;
@@ -327,30 +317,10 @@
   }
 }
 
-/* Light mode - keep darker navbar for logo visibility */
 @media (prefers-color-scheme: light) {
   .ocuroot-navbar {
     --navbar-bg: #2d2e30;
     --navbar-text: #f0f0f0;
     --navbar-border: #404142;
-  }
-  
-  .hamburger-line {
-    background-color: #f0f0f0;
-  }
-  
-  .dropdown-menu {
-    background-color: var(--navbar-bg);
-    border-color: var(--navbar-border);
-  }
-  
-  .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .theme-toggle:hover,
-  .user-button:hover,
-  .navbar-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
   }
 }

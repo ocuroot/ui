@@ -1,6 +1,6 @@
 package navbar
 
-// NavItem interface allows mixing of links and dropdowns in any order
+// ShowcaseNavbar creates a consistent navbar for all showcase pages
 type NavItem interface {
 	IsNavItem()
 }
@@ -42,14 +42,12 @@ type NavbarConfig struct {
 templ Navbar(config NavbarConfig) {
 	<nav class="ocuroot-navbar">
 		<div class="navbar-container">
-			<div class="navbar-brand">
-				<a href={ templ.URL(config.BrandURL) } class="brand-link">
-					if config.LogoURL != "" {
-						<img src={ config.LogoURL } alt={ config.BrandName } class="brand-logo"/>
-					}
-					<span class="brand-text">{ config.BrandName }</span>
-				</a>
-			</div>
+			<a href={ templ.URL(config.BrandURL) } class="navbar-brand">
+				if config.LogoURL != "" {
+					<img src={ config.LogoURL } alt={ config.BrandName } class="brand-logo"/>
+				}
+				<span class="brand-text">{ config.BrandName }</span>
+			</a>
 			
 			<button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
 				<span class="hamburger-line"></span>
@@ -100,11 +98,9 @@ templ Navbar(config NavbarConfig) {
 						</button>
 					}
 					if config.ShowUserMenu {
-						<div class="user-menu">
-							<button class="user-button" aria-label="User menu">
-								<img src={ config.UserAvatarURL } alt="User" class="user-avatar"/>
-							</button>
-						</div>
+						<button class="user-button" aria-label="User menu">
+							<img src={ config.UserAvatarURL } alt="User" class="user-avatar"/>
+						</button>
 					}
 				</div>
 			</div>

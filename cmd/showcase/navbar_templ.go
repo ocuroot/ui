@@ -13,7 +13,6 @@ import (
 )
 
 // ShowcaseNavbar creates a consistent navbar for all showcase pages
-// activePage should be one of: "showcase", "modal", "table", "components"
 func ShowcaseNavbar(activePage string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -51,9 +50,9 @@ func ShowcaseNavbar(activePage string) templ.Component {
 					Active: activePage == "table",
 				},
 				navbar.NavLink{
-					Name:   "DocNav",
+					Name:   "Docs",
 					URL:    "/docs/intro",
-					Active: activePage == "/docs/intro",
+					Active: activePage == "docs",
 				},
 
 				navbar.NavDropdown{
@@ -77,7 +76,6 @@ func ShowcaseNavbar(activePage string) templ.Component {
 			},
 			ShowThemeToggle: true,
 			ShowUserMenu:    false,
-			UserAvatarURL:   "/static/anon_user.svg",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
