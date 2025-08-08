@@ -81,9 +81,18 @@ func DocNavShowcasePage() templ.Component {
 				{
 					Heading: "Reference",
 					Links: []docnav.NavLink{
-						{Title: "CLI", URL: "/docs/reference/cli"},
-						{Title: "SDK", URL: "/docs/reference/sdk"},
-						{Title: "API", URL: "/docs/reference/api"},
+						{Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
+							{Title: "Commands", URL: "/docs/reference/cli/commands"},
+							{Title: "Config", URL: "/docs/reference/cli/config"},
+						}},
+						{Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
+							{Title: "Go", URL: "/docs/reference/sdk/go"},
+							{Title: "JavaScript", URL: "/docs/reference/sdk/js"},
+						}},
+						{Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
+							{Title: "Auth", URL: "/docs/reference/api/auth"},
+							{Title: "Releases", URL: "/docs/reference/api/releases"},
+						}},
 					},
 				},
 			},
@@ -237,9 +246,18 @@ func DocIntroPage() templ.Component {
 				{
 					Heading: "Reference",
 					Links: []docnav.NavLink{
-						{Title: "CLI", URL: "/docs/reference/cli"},
-						{Title: "SDK", URL: "/docs/reference/sdk"},
-						{Title: "API", URL: "/docs/reference/api"},
+						{Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
+							{Title: "Commands", URL: "/docs/reference/cli/commands"},
+							{Title: "Config", URL: "/docs/reference/cli/config"},
+						}},
+						{Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
+							{Title: "Go", URL: "/docs/reference/sdk/go"},
+							{Title: "JavaScript", URL: "/docs/reference/sdk/js"},
+						}},
+						{Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
+							{Title: "Auth", URL: "/docs/reference/api/auth"},
+							{Title: "Releases", URL: "/docs/reference/api/releases"},
+						}},
 					},
 				},
 			},
@@ -352,9 +370,18 @@ func DocQuickstartPage() templ.Component {
 				{
 					Heading: "Reference",
 					Links: []docnav.NavLink{
-						{Title: "CLI", URL: "/docs/reference/cli"},
-						{Title: "SDK", URL: "/docs/reference/sdk"},
-						{Title: "API", URL: "/docs/reference/api"},
+						{Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
+							{Title: "Commands", URL: "/docs/reference/cli/commands"},
+							{Title: "Config", URL: "/docs/reference/cli/config"},
+						}},
+						{Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
+							{Title: "Go", URL: "/docs/reference/sdk/go"},
+							{Title: "JavaScript", URL: "/docs/reference/sdk/js"},
+						}},
+						{Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
+							{Title: "Auth", URL: "/docs/reference/api/auth"},
+							{Title: "Releases", URL: "/docs/reference/api/releases"},
+						}},
 					},
 				},
 			},
@@ -467,9 +494,18 @@ func DocInstallPage() templ.Component {
 				{
 					Heading: "Reference",
 					Links: []docnav.NavLink{
-						{Title: "CLI", URL: "/docs/reference/cli"},
-						{Title: "SDK", URL: "/docs/reference/sdk"},
-						{Title: "API", URL: "/docs/reference/api"},
+						{Title: "CLI", URL: "/docs/reference/cli", Children: []docnav.NavLink{
+							{Title: "Commands", URL: "/docs/reference/cli/commands"},
+							{Title: "Config", URL: "/docs/reference/cli/config"},
+						}},
+						{Title: "SDK", URL: "/docs/reference/sdk", Children: []docnav.NavLink{
+							{Title: "Go", URL: "/docs/reference/sdk/go"},
+							{Title: "JavaScript", URL: "/docs/reference/sdk/js"},
+						}},
+						{Title: "API", URL: "/docs/reference/api", Children: []docnav.NavLink{
+							{Title: "Auth", URL: "/docs/reference/api/auth"},
+							{Title: "Releases", URL: "/docs/reference/api/releases"},
+						}},
 					},
 				},
 			},

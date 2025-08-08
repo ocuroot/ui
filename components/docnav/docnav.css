@@ -42,6 +42,24 @@
   margin-top: 0.25rem; /* was space-y-1 */
 }
 
+.docnav-sublist {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0 0; /* small gap above children */
+  margin-left: 1rem; /* indent children */
+  border-left: 1px solid var(--border-color);
+}
+
+.docnav-sublist li + li {
+  margin-top: 0.125rem;
+}
+
+.docnav-sublist .docnav-link {
+  padding-left: 0.75rem; /* slightly less than parent */
+  font-size: 0.8em; /* smaller than parent */
+  border-left: none; /* avoid double emphasis */
+}
+
 .docnav-link {
   color: var(--text-secondary);
   background-color: transparent;

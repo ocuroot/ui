@@ -7,6 +7,7 @@ import (
 type NavLink struct {
 	Title string
 	URL   templ.SafeURL
+	Children []NavLink
 }
 
 type NavSection struct {
@@ -23,6 +24,18 @@ func isActive(current string, url templ.SafeURL) bool {
 	c := strings.TrimSuffix(current, "/")
 	u := strings.TrimSuffix(string(url), "/")
 	return c == u
+}
+
+func isActiveOrDescendant(current string, l NavLink) bool {
+	if isActive(current, l.URL) {
+		return true
+	}
+	for _, child := range l.Children {
+		if isActiveOrDescendant(current, child) {
+			return true
+		}
+	}
+	return false
 }
 
 func linkClass(active bool) string {
@@ -42,7 +55,16 @@ templ DocNav(p DocNavProps) {
 				<ul class="docnav-list">
 					for _, l := range section.Links {
 						<li>
-							<a href={ l.URL } class={ linkClass(isActive(p.CurrentPath, l.URL)) }>{ l.Title }</a>
+							<a href={ l.URL } class={ linkClass(isActiveOrDescendant(p.CurrentPath, l)) }>{ l.Title }</a>
+							if len(l.Children) > 0 {
+								<ul class="docnav-sublist">
+									for _, sl := range l.Children {
+										<li>
+											<a href={ sl.URL } class={ linkClass(isActive(p.CurrentPath, sl.URL)) }>{ sl.Title }</a>
+										</li>
+									}
+								</ul>
+							}
 						</li>
 					}
 				</ul>
