@@ -2,16 +2,54 @@
  * DOCNAV COMPONENT CSS
  * ========================================= */
 
+.docnav {
+  width: 100%;
+  height: 100%;
+}
+
+.docnav-sidebar {
+  flex: 20%;
+  width: 20%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.docnav-section {
+  margin-bottom: 1.5rem; /* was mb-6 */
+}
+
 .docnav-section-heading {
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-color);
+  padding-left: 1rem;   /* was px-4 */
+  padding-right: 1rem;  /* was px-4 */
+  padding-top: 1rem;    /* was pt-4 */
+  padding-bottom: 0.25rem; /* was pb-1 */
+  font-size: 0.75rem;   /* was text-xs */
+  font-weight: 600;     /* was font-semibold */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* was tracking-wide */
+}
+
+.docnav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 0.5rem; /* was mt-2 */
+}
+
+.docnav-list li + li {
+  margin-top: 0.25rem; /* was space-y-1 */
 }
 
 .docnav-link {
   color: var(--text-secondary);
   background-color: transparent;
   transition: background-color 0.15s ease, color 0.15s ease;
-  display: block;
+  display: block; /* was block */
+  padding: 0.5rem 1rem; /* was py-2 px-4 */
+  font-weight: 500; /* was font-medium */
+  border-left: 2px solid transparent; /* was border-l-2 */
 }
 
 .docnav-link:hover {

@@ -22,7 +22,7 @@ templ DocNavShowcasePage() {
         <body>
             @ShowcaseNavbar("docnav")
             <div class="main-fill row">
-                <div class="sidebar sidebar-separator">
+                <div class="docnav-sidebar sidebar-separator">
                     @docnav.DocNav(docnav.DocNavProps{
                         CurrentPath: "/docs/getting-started",
                         Sections: []docnav.NavSection{
@@ -83,7 +83,7 @@ templ DocIntroPage() {
         <body>
             @ShowcaseNavbar("docnav")
             <div class="main-fill row">
-                <div class="sidebar sidebar-separator">
+                <div class="docnav-sidebar sidebar-separator">
                     @docnav.DocNav(docnav.DocNavProps{
                         CurrentPath: "/docs/intro",
                         Sections: []docnav.NavSection{
@@ -139,7 +139,7 @@ templ DocQuickstartPage() {
         <body>
             @ShowcaseNavbar("docnav")
             <div class="main-fill row">
-                <div class="sidebar sidebar-separator">
+                <div class="docnav-sidebar sidebar-separator">
                     @docnav.DocNav(docnav.DocNavProps{
                         CurrentPath: "/docs/getting-started",
                         Sections: []docnav.NavSection{
@@ -199,7 +199,7 @@ templ DocInstallPage() {
         <body>
             @ShowcaseNavbar("docnav")
             <div class="main-fill row">
-                <div class="sidebar sidebar-separator">
+                <div class="docnav-sidebar sidebar-separator">
                     @docnav.DocNav(docnav.DocNavProps{
                         CurrentPath: "/docs/install",
                         Sections: []docnav.NavSection{

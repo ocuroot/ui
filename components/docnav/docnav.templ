@@ -27,19 +27,19 @@ func isActive(current string, url templ.SafeURL) bool {
 
 func linkClass(active bool) string {
 	if active {
-		return "docnav-link docnav-link--active block px-4 py-2 font-medium border-l-2"
+		return "docnav-link docnav-link--active"
 	}
-	return "docnav-link block px-4 py-2"
+	return "docnav-link"
 }
 
 templ DocNav(p DocNavProps) {
-	<nav class="w-full h-full">
+	<nav class="docnav">
 		for _, section := range p.Sections {
-			<div class="mb-6">
+			<div class="docnav-section">
 				if section.Heading != "" {
-					<div class="docnav-section-heading px-4 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide">{ section.Heading }</div>
+					<div class="docnav-section-heading">{ section.Heading }</div>
 				}
-				<ul class="mt-2 space-y-1">
+				<ul class="docnav-list">
 					for _, l := range section.Links {
 						<li>
 							<a href={ l.URL } class={ linkClass(isActive(p.CurrentPath, l.URL)) }>{ l.Title }</a>
