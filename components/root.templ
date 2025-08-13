@@ -3,6 +3,7 @@ package components
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/ocuroot/ui/css"
+	"strings"
 )
 
 templ Root(c echo.Context, scripts ...templ.Component) {
@@ -37,8 +38,8 @@ templ RootNoContainer(c echo.Context, scripts ...templ.Component) {
 	}
 }
 
-templ Container() {
-	<div class="container max-w-screen-xl mx-auto py-8 px-8">
+templ Container(classes ...string) {
+	<div class={ strings.Join(append(classes, "container"), " ") }>
 		{ children... }
 	</div>
 }
