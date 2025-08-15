@@ -9,6 +9,11 @@ local_resource(
     ignore=["**/*_templ.go"],
 )
 
+middleware = """function(req, res, next) { \
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); \
+  return next(); \
+}"""
+
 local_resource(
     'sync',
     cmd="yarn global add browser-sync",
@@ -17,8 +22,9 @@ local_resource(
   --port {proxy_port} \
   --proxy 'localhost:{port}' \
   --reload-delay 500 \
-  --middleware '{middleware}'""".format(proxy_port=PROXY_PORT, port=PORT, middleware='function(req, res, next) { \
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); \
-    return next(); \
-  }'),
+  --middleware '{middleware}'""".format(
+      proxy_port=PROXY_PORT, 
+      port=PORT, 
+      middleware=middleware,
+    ),
 )
