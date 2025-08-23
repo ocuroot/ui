@@ -5,6 +5,12 @@ type NavItem interface {
 	IsNavItem()
 }
 
+type NavComponent struct {
+	Component templ.Component	
+}
+
+func (NavComponent) IsNavItem() {}
+
 // NavLink represents a simple navigation link
 type NavLink struct {
 	Name   string
@@ -59,6 +65,10 @@ templ Navbar(config NavbarConfig) {
 				<ul class="navbar-nav">
 					for _, item := range config.Items {
 						switch v := item.(type) {
+						case NavComponent:
+							<li class="nav-item">
+								@v.Component
+							</li>
 						case NavLink:
 							<li class="nav-item">
 								if v.Active {

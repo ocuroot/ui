@@ -54,7 +54,6 @@ func ShowcaseNavbar(activePage string) templ.Component {
 					URL:    "/docs/intro",
 					Active: activePage == "docs",
 				},
-
 				navbar.NavDropdown{
 					ID:   "showcase",
 					Name: "Showcase",
@@ -73,10 +72,42 @@ func ShowcaseNavbar(activePage string) templ.Component {
 					URL:    "/components",
 					Active: activePage == "components",
 				},
+				navbar.NavComponent{
+					Component: NavComponentExample(),
+				},
 			},
 			ShowThemeToggle: true,
 			ShowUserMenu:    false,
 		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func NavComponentExample() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var2 == nil {
+			templ_7745c5c3_Var2 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex gap-4 items-center\"><a class=\"flex flex-col items-center gap-2 bg-transparent rounded p-2 hover:bg-gray-100\" href=\"/components#buttons\"><svg class=\"h-4 w-4 text-white\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle> <line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"12\"></line> <line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"21\"></line></svg></a> <a class=\"flex flex-col items-center gap-2 bg-transparent rounded p-2 hover:bg-gray-100\" href=\"/components#alerts\"><svg class=\"h-4 w-4 text-white\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"7\" width=\"20\" height=\"10\" rx=\"2\"></rect> <polyline points=\"2 12 22 2 12 22\"></polyline></svg></a> <a class=\"flex flex-col items-center gap-2 bg-transparent rounded p-2 hover:bg-gray-100\" href=\"/components#breadcrumbs\"><svg class=\"h-4 w-4 text-white\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2L2 7l10 5 10-5\"></path> <path d=\"M2 17l10 5 10-5M2 12l10 5 10-5\"></path></svg></a></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

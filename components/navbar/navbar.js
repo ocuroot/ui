@@ -3,6 +3,15 @@
  * Handles mobile menu toggle, dropdown functionality, and theme switching
  */
 
+// Use IIFE to prevent global pollution and redeclaration issues
+(function() {
+  'use strict';
+  
+  // Prevent redeclaration if already loaded
+  if (typeof window.OcurootNavbar !== 'undefined') {
+    return;
+  }
+
 class OcurootNavbar {
   constructor() {
     this.init();
@@ -64,23 +73,41 @@ class OcurootNavbar {
       const toggle = dropdown.querySelector('.dropdown-toggle');
       if (!toggle) return;
       
-      // Open dropdown on mouseenter
-      dropdown.addEventListener('mouseenter', () => {
-        this.closeAllDropdowns();
-        dropdown.classList.add('active');
-      });
+      // Check if we're on a touch device
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       
-      // Close dropdown on mouseleave with a small delay
-      dropdown.addEventListener('mouseleave', () => {
-        setTimeout(() => {
-          dropdown.classList.remove('active');
-        }, 100); // Small delay to prevent flickering
-      });
-      
-      // Prevent default click behavior on toggle links
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-      });
+      if (isTouchDevice) {
+        // On touch devices, use click to toggle
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isActive = dropdown.classList.contains('active');
+          
+          // Close all other dropdowns first
+          this.closeAllDropdowns();
+          
+          // Toggle this dropdown
+          if (!isActive) {
+            dropdown.classList.add('active');
+          }
+        });
+      } else {
+        // On non-touch devices, use hover
+        dropdown.addEventListener('mouseenter', () => {
+          this.closeAllDropdowns();
+          dropdown.classList.add('active');
+        });
+        
+        dropdown.addEventListener('mouseleave', () => {
+          setTimeout(() => {
+            dropdown.classList.remove('active');
+          }, 100);
+        });
+        
+        // Still prevent default click behavior
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+        });
+      }
     });
   }
 
@@ -145,6 +172,14 @@ class OcurootNavbar {
         this.closeMobileMenu();
       }
     });
+    
+    // Also handle escape key to close menus
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeAllDropdowns();
+        this.closeMobileMenu();
+      }
+    });
   }
 
   // Handle window resize
@@ -157,6 +192,9 @@ class OcurootNavbar {
     }
   }
 }
+
+// Make class available globally
+window.OcurootNavbar = OcurootNavbar;
 
 // Initialize navbar when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -172,3 +210,5 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = OcurootNavbar;
 }
+
+})(); // End of IIFE
