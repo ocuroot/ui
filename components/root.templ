@@ -44,14 +44,27 @@ templ Container(classes ...string) {
 	</div>
 }
 
+type BodyProps struct {
+	Title string
+}
+
 templ Body() {
+	@BodyWithProps(BodyProps{
+	})
+}
+
+templ BodyWithProps(props BodyProps) {
 	<!DOCTYPE html>
 	<html>
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			@css.UnifiedCSSLink()
-			<title>Ocuroot</title>
+			if props.Title != "" {
+				<title>Ocuroot | { props.Title }</title>
+			} else {
+				<title>Ocuroot</title>
+			}
 			<style>
 				[role="tab"][aria-selected="true"] {
 					border-bottom-width: 2px;
