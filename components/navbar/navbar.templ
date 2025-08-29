@@ -50,7 +50,7 @@ templ Navbar(config NavbarConfig) {
 		<div class="navbar-container">
 			<a href={ templ.URL(config.BrandURL) } class="navbar-brand">
 				if config.LogoURL != "" {
-					<img src={ config.LogoURL } alt={ config.BrandName } class="brand-logo"/>
+					<img src={ config.LogoURL } alt="The Ocuroot logo" class="brand-logo"/>
 				}
 				<span class="brand-text">{ config.BrandName }</span>
 			</a>

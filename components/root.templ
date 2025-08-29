@@ -6,14 +6,6 @@ import (
 	"strings"
 )
 
-templ Root(c echo.Context, scripts ...templ.Component) {
-	@RootNoContainer(c, scripts...) {
-		@Container() {
-			{ children... }
-		}
-	}
-}
-
 templ RootSimple(title string, scripts ...templ.Component) {
 	@Body() {
 		<header class="bg-navbar w-full border-b">
@@ -48,6 +40,7 @@ type BodyProps struct {
 	Title string
 	CanonicalURL string
 	Language string
+	Meta map[string]string
 }
 
 templ Body() {
@@ -55,6 +48,7 @@ templ Body() {
 		Title: "",
 		CanonicalURL: "",
 		Language: "",
+		Meta: map[string]string{},
 	})
 }
 
@@ -75,6 +69,9 @@ templ BodyWithProps(props BodyProps) {
 			}
 			if props.Language != "" {
 				<link rel="alternate" hreflang={ props.Language } href={ props.CanonicalURL }/>
+			}
+			for k, v := range props.Meta {
+				<meta name={ k } content={ v }/>
 			}
 			<style>
 				[role="tab"][aria-selected="true"] {

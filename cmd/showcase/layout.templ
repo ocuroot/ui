@@ -2,30 +2,26 @@ package main
 
 import (
     "github.com/ocuroot/ui/components"
-    "github.com/ocuroot/ui/css"
     "github.com/ocuroot/ui/js"
 )
 
 // ShowcaseLayout creates a consistent layout for all showcase pages
 // activePage should be one of: "showcase", "modal", "table", "components"
 templ ShowcaseLayout(activePage, title, description string) {
-    <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>{ title } - Ocuroot</title>
-            @css.UnifiedCSSLink()
-        </head>
-        <body>
-            @ShowcaseNavbar(activePage)
-            @components.Container() {
-                <h1>{ title }</h1>
-                <p class="subtitle">{ description }</p>
-                { children... }
-            }
-            @js.UnifiedJSScript()
-        </body>
-    </html>
+    @components.BodyWithProps(components.BodyProps{
+        Title: title,
+        Language: "en",
+        Meta: map[string]string{
+            "description": description,
+        },
+    }) {
+        @ShowcaseNavbar(activePage)
+        @components.Container() {
+            <h1>{ title }</h1>
+            <p class="subtitle">{ description }</p>
+            { children... }
+        }
+        @js.UnifiedJSScript()
+    }
 }
 
