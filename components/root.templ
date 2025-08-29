@@ -46,10 +46,14 @@ templ Container(classes ...string) {
 
 type BodyProps struct {
 	Title string
+	CanonicalURL string
+	Language string
 }
 
 templ Body() {
 	@BodyWithProps(BodyProps{
+		Title: "",
+		CanonicalURL: "",
 	})
 }
 
@@ -64,6 +68,12 @@ templ BodyWithProps(props BodyProps) {
 				<title>Ocuroot | { props.Title }</title>
 			} else {
 				<title>Ocuroot</title>
+			}
+			if props.CanonicalURL != "" {
+				<link rel="canonical" href={ props.CanonicalURL }/>
+			}
+			if props.Language != "" {
+				<link rel="alternate" hreflang={ props.Language } href={ props.CanonicalURL }/>
 			}
 			<style>
 				[role="tab"][aria-selected="true"] {
