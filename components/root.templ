@@ -1,7 +1,6 @@
 package components
 
 import (
-	"github.com/labstack/echo/v4"
 	"github.com/ocuroot/ui/css"
 	"strings"
 )
@@ -17,14 +16,6 @@ templ RootSimple(title string, scripts ...templ.Component) {
 		@Container() {
 			{ children... }
 		}
-		@Footer("Ocuroot", "dev")
-		@Scripts(scripts...)
-	}
-}
-
-templ RootNoContainer(c echo.Context, scripts ...templ.Component) {
-	@Body() {
-		{ children... }
 		@Footer("Ocuroot", "dev")
 		@Scripts(scripts...)
 	}
