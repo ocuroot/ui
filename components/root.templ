@@ -5,22 +5,6 @@ import (
 	"strings"
 )
 
-templ RootSimple(title string, scripts ...templ.Component) {
-	@Body() {
-		<header class="bg-navbar w-full border-b">
-			<div class="flex items-center justify-between mx-auto p-4 max-w-screen-xl">
-				<h1 class="text-xl font-semibold text-navbar">{ title }</h1>
-				@ThemeToggle()
-			</div>
-		</header>
-		@Container() {
-			{ children... }
-		}
-		@Footer("Ocuroot", "dev")
-		@Scripts(scripts...)
-	}
-}
-
 templ Container(classes ...string) {
 	<div class={ strings.Join(append(classes, "container"), " ") }>
 		{ children... }
@@ -32,15 +16,6 @@ type BodyProps struct {
 	CanonicalURL string
 	Language string
 	Meta map[string]string
-}
-
-templ Body() {
-	@BodyWithProps(BodyProps{
-		Title: "",
-		CanonicalURL: "",
-		Language: "",
-		Meta: map[string]string{},
-	})
 }
 
 templ BodyWithProps(props BodyProps) {
