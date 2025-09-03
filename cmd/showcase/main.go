@@ -44,12 +44,21 @@ func main() {
 		componentsShowcase := ComponentsShowcase()
 		componentsShowcase.Render(r.Context(), w)
 	})
+	http.HandleFunc("/social-card", func(w http.ResponseWriter, r *http.Request) {
+		socialCardShowcase := SocialCardShowcase()
+		socialCardShowcase.Render(r.Context(), w)
+	})
 	http.HandleFunc(css.Default().GetVersionedURL(), css.Default().Serve)
 	http.HandleFunc(js.Default().GetVersionedURL(), js.Default().Serve)
 
 	http.HandleFunc("/static/logo.svg", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/svg+xml")
 		w.Write([]byte(assets.Logo))
+	})
+
+	http.HandleFunc("/static/social.svg", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Write(assets.Social)
 	})
 
 	http.HandleFunc("/static/anon_user.svg", func(w http.ResponseWriter, r *http.Request) {

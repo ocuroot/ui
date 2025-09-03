@@ -11,4 +11,7 @@ var (
 
 	//go:embed anon_user.svg
 	AnonUser []byte
+
+	//go:embed social.svg
+	Social []byte
 )

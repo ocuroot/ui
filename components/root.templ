@@ -12,10 +12,19 @@ templ Container(classes ...string) {
 }
 
 type BodyProps struct {
-	Title string
+	Title        string
 	CanonicalURL string
-	Language string
-	Meta map[string]string
+	Language     string
+	Meta         map[string]string
+	SocialCard   *SocialCard
+}
+
+type SocialCard struct {
+	Description string
+	Image       string
+	ImageAlt    string
+	Type        string // "website", "article", etc.
+	SiteName    string
 }
 
 templ BodyWithProps(props BodyProps) {
@@ -38,6 +47,42 @@ templ BodyWithProps(props BodyProps) {
 			}
 			for k, v := range props.Meta {
 				<meta name={ k } content={ v }/>
+			}
+			if props.SocialCard != nil {
+				// OpenGraph meta tags
+				<meta property="og:title" content={ props.Title }/>
+				if props.SocialCard.Description != "" {
+					<meta property="og:description" content={ props.SocialCard.Description }/>
+				}
+				if props.SocialCard.Image != "" {
+					<meta property="og:image" content={ props.SocialCard.Image }/>
+				}
+				if props.SocialCard.ImageAlt != "" {
+					<meta property="og:image:alt" content={ props.SocialCard.ImageAlt }/>
+				}
+				if props.SocialCard.Type != "" {
+					<meta property="og:type" content={ props.SocialCard.Type }/>
+				} else {
+					<meta property="og:type" content="website"/>
+				}
+				if props.SocialCard.SiteName != "" {
+					<meta property="og:site_name" content={ props.SocialCard.SiteName }/>
+				}
+				if props.CanonicalURL != "" {
+					<meta property="og:url" content={ props.CanonicalURL }/>
+				}
+				// Twitter Card meta tags
+				<meta name="twitter:card" content="summary_large_image"/>
+				<meta name="twitter:title" content={ props.Title }/>
+				if props.SocialCard.Description != "" {
+					<meta name="twitter:description" content={ props.SocialCard.Description }/>
+				}
+				if props.SocialCard.Image != "" {
+					<meta name="twitter:image" content={ props.SocialCard.Image }/>
+				}
+				if props.SocialCard.ImageAlt != "" {
+					<meta name="twitter:image:alt" content={ props.SocialCard.ImageAlt }/>
+				}
 			}
 			<style>
 				[role="tab"][aria-selected="true"] {

@@ -72,6 +72,11 @@ func ShowcaseNavbar(activePage string) templ.Component {
 					URL:    "/components",
 					Active: activePage == "components",
 				},
+				navbar.NavLink{
+					Name:   "Social Cards",
+					URL:    "/social-card",
+					Active: activePage == "social-card",
+				},
 				navbar.NavComponent{
 					Component: NavComponentExample(),
 				},

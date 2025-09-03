@@ -25,3 +25,30 @@ templ ShowcaseLayout(activePage, title, description string) {
     }
 }
 
+// SocialCardLayout demonstrates social card metadata usage
+templ SocialCardLayout(activePage, title, description string) {
+    @components.BodyWithProps(components.BodyProps{
+        Title: title,
+        CanonicalURL: "http://localhost:8080/social-card",
+        Language: "en",
+        Meta: map[string]string{
+            "description": description,
+        },
+        SocialCard: &components.SocialCard{
+            Description: "Learn how Ocuroot's UI components handle social media card metadata for OpenGraph and Twitter Cards. This example shows automatic generation of social sharing previews.",
+            Image: "http://localhost:8080/static/social.svg",
+            ImageAlt: "Ocuroot social media card image",
+            Type: "website",
+            SiteName: "Ocuroot UI Showcase",
+        },
+    }) {
+        @ShowcaseNavbar(activePage)
+        @components.Container() {
+            <h1>{ title }</h1>
+            <p class="subtitle">{ description }</p>
+            { children... }
+        }
+        @js.UnifiedJSScript()
+    }
+}
+
