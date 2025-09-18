@@ -16,7 +16,14 @@ type BodyProps struct {
 	CanonicalURL string
 	Language     string
 	Meta         map[string]string
+	Alternates []Alternate
 	SocialCard   *SocialCard
+}
+
+type Alternate struct {
+	Title string
+	URL string
+	Type string
 }
 
 type SocialCard struct {
@@ -47,6 +54,9 @@ templ BodyWithProps(props BodyProps) {
 			}
 			for k, v := range props.Meta {
 				<meta name={ k } content={ v }/>
+			}
+			for _, alt := range props.Alternates {
+				<link rel="alternate" href={ alt.URL } type={ alt.Type } title={ alt.Title }/>
 			}
 			if props.SocialCard != nil {
 				// OpenGraph meta tags
